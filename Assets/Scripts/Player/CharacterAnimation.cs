@@ -14,6 +14,6 @@ public class CharacterAnimation : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _animator.SetFloat("Speed_f", _movePlayerAction.ReadValue<Vector2>().magnitude);
+        _animator.SetFloat("Speed", _movePlayerAction.ReadValue<Vector2>().sqrMagnitude);
     }
 }

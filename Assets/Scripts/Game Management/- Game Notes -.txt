@@ -12,13 +12,36 @@ ________________________________________________________________________________
 
     FIRST!!
 
-       
+        Morrowind style menu
+            Separate resizable/movable windows for:
+                Inventory/Equip - Inventory with tabs for different types of stuff
+                Map - Local and global. Maybe make map a separate menu. 
+                Character Page - Stats, class, skills, etc. 
+                Quests/Journal?
+                Magic/Mental stuff?
+            Make map a separate menu? 
+            OR, have esc bring up the menu as you last left it, but if you push m, then it opens the same except the map is on top.
+                Same goes for other keys for other menus, i for inv etc. 
+            Inventory/Items
+                Types of items:
+                    Weapon/Armor
+                    Usable (like potions)
+                    Tools
+                    Magic stuff
+                    Misc?
 
-        
 ---------------------------------------------------------------------------------------------------------
 
 
     DONE:
+
+        Character movement
+            3rd person
+            Changeable camera angle
+
+        Camera
+            Rotate camera with mouse
+            Zoom with mouse wheel
 
 
 
