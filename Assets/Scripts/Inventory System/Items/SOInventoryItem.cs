@@ -20,6 +20,8 @@ public class SOInventoryItem : SOItem
         base.UseItem();
 
         // TODO - Set the item to the mouse cursor so you can equip/use/drop the item. 
+        // Clicking on equipment items equips them and clicking on usable items uses them as of now. 
+        // Might be better this way actually. 
     }
 
     // Heard by PlayerInventoryManager. 

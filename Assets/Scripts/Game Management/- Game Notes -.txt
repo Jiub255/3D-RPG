@@ -60,6 +60,12 @@ ________________________________________________________________________________
                                              GAME OVERVIEW
                                              -------------
 
+    Have a "Scene Setup" object in every scene with the SceneSetup script attached. 
+        Instantiates:
+            Player
+            Cameras object
+            UI object
+        Starts scene music. 
 
 
 

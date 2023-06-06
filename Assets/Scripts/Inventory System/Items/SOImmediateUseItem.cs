@@ -10,7 +10,7 @@ public class SOImmediateUseItem : SOItem
     {
         base.PickUpItem(inventoryManager);
 
-        Debug.Log($"Immediate Used {name}");
+        Debug.Log($"Immediate-used {name}");
 
         OnPickUpItem?.Invoke();
     }
