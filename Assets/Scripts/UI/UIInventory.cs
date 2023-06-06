@@ -11,6 +11,8 @@ public class UIInventory : MonoBehaviour
 
     private void OnEnable()
     {
+		SetupInventorySlots();
+
 		_inventory.OnInventoryChanged += SetupInventorySlots;
 		MenuController.OnOpenInventory += SetupInventorySlots;
     }

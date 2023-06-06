@@ -22,7 +22,7 @@ public class SOInventory : ScriptableObject , IResettable
         return null;
     }
 
-    public void AddItem(SOItem item)
+    public void AddItem(SOInventoryItem item)
     {
         ItemAmount listItemAmount = Contains(item);
         // Increase amount if item already in list. 
@@ -40,7 +40,7 @@ public class SOInventory : ScriptableObject , IResettable
         OnInventoryChanged?.Invoke();
     }
 
-    public void RemoveItem(SOItem item)
+    public void RemoveItem(SOInventoryItem item)
     {
         ItemAmount listItemAmount = Contains(item);
         if (listItemAmount != null)

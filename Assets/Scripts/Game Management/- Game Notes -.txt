@@ -12,6 +12,12 @@ ________________________________________________________________________________
 
     FIRST!!
 
+
+        Not sure if I want to keep the different subclasses of SOEquipmentItem. 
+            Maybe just do an enum or a SO enum-like thing. 
+            Although this way makes each piece more independent, instead of them all having the same variables. 
+
+
         Morrowind style menu
             Separate resizable/movable windows for:
                 Inventory/Equip - Inventory with tabs for different types of stuff

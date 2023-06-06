@@ -3,15 +3,15 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
 	[SerializeField]
-	private SOInventory _inventory;
+	private SOInventory _inventorySO;
 
-	public void AddItem(SOItem item)
+	public void AddItem(SOInventoryItem item)
     {
-		_inventory.AddItem(item);
+		_inventorySO.AddItem(item);
     }
 
-	public void RemoveItem(SOItem item)
+	public void RemoveItem(SOInventoryItem item)
     {
-		_inventory.RemoveItem(item);
+		_inventorySO.RemoveItem(item);
     }
 }

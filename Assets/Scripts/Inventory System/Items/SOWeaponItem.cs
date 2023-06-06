@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Weapon Item", menuName = "Inventory/Weapon Item")]
+[CreateAssetMenu(fileName = "New Weapon Item", menuName = "Equipment/Weapon Item")]
 public class SOWeaponItem : SOEquipmentItem
 {
     public override void UseItem()

@@ -1,13 +1,15 @@
-// Only extending InventoryManager to listen for remove item events. 
+// Only extending InventoryManager to listen for add/remove item events. 
 public class PlayerInventoryManager : InventoryManager
 {
     private void OnEnable()
     {
-        SOItem.OnRemoveItem += RemoveItem;
+        SOInventoryItem.OnAddItem += AddItem;
+        SOInventoryItem.OnRemoveItem += RemoveItem;
     }
 
     private void OnDisable()
     {
-        SOItem.OnRemoveItem -= RemoveItem;
+        SOInventoryItem.OnAddItem -= AddItem;
+        SOInventoryItem.OnRemoveItem -= RemoveItem;
     }
 }

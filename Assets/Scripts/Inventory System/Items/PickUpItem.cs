@@ -9,7 +9,7 @@ public class PickUpItem : Interactable
     {
         base.Interact(collision);
 
-        _item.PickUpItem(collision.GetComponent<InventoryManager>());
+        _item.PickUpItem(collision.GetComponentInChildren<InventoryManager>());
 
         gameObject.SetActive(false);
     }
