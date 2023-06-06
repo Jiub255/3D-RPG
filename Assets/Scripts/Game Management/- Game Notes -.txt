@@ -29,6 +29,9 @@ ________________________________________________________________________________
                     Tools
                     Magic stuff
                     Misc?
+            Make it so when you click on an item it gets used/equipped (instead of having to drag and drop it on your character)
+                Have left click drop it? Or set it to the mouse cursor so you can choose where to put it?
+                Or just do it straight Morrowind style?
 
 ---------------------------------------------------------------------------------------------------------
 

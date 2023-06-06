@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _right;
     private InputAction _movePlayerAction;
     private bool _moving = false;
+    private Rigidbody _rigidbody;
 
     private void Start()
     {
@@ -21,8 +22,9 @@ public class PlayerMovement : MonoBehaviour
         _forward = transform.forward;
         _right = transform.right;
         _movePlayerAction = S.I.IM.PC.World.MovePlayer;
+        _rigidbody = GetComponent<Rigidbody>();
 
-        CameraRotate.OnRotatedCamera += GetVectors;
+        CameraMoveRotate.OnRotatedCamera += GetVectors;
 
         S.I.IM.PC.World.MovePlayer.started += (c) => _moving = true;
         S.I.IM.PC.World.MovePlayer.canceled += (c) => _moving = false;
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        CameraRotate.OnRotatedCamera -= GetVectors;
+        CameraMoveRotate.OnRotatedCamera -= GetVectors;
    
         S.I.IM.PC.World.MovePlayer.started -= (c) => _moving = true;
         S.I.IM.PC.World.MovePlayer.canceled -= (c) => _moving = false;
@@ -51,12 +53,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_moving)
         {
-            // TODO - Move with rigidbody instead? 
-            _transform.position += _movement * Time.fixedDeltaTime * _speed;
-
             // Lerp instead of turn instantly. 
             Quaternion lookRotation = Quaternion.LookRotation(_movement);
             _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.fixedDeltaTime * _turnSpeed);
+
+            _rigidbody.MovePosition(_rigidbody.position + _movement * Time.fixedDeltaTime * _speed);
         }
     }
 

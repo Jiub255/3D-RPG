@@ -1,14 +1,17 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
-public class SOInventory : ScriptableObject
+public class SOInventory : ScriptableObject , IResettable
 {
-	private List<ItemAmount> _itemAmounts;
+    public event Action OnInventoryChanged;
+
+	public List<ItemAmount> ItemAmounts;
 
 	private ItemAmount Contains(SOItem item)
     {
-        foreach (ItemAmount itemAmount in _itemAmounts)
+        foreach (ItemAmount itemAmount in ItemAmounts)
         {
             if (itemAmount.Item == item)
             {
@@ -30,11 +33,11 @@ public class SOInventory : ScriptableObject
         // Add new itemAmount to list if not. 
         else
         {
-            ItemAmount newItemAmount = new();
-            newItemAmount.Item = item;
-            newItemAmount.Amount = 1;
-            _itemAmounts.Add(newItemAmount);
+            ItemAmount newItemAmount = new(item, 1);
+            ItemAmounts.Add(newItemAmount);
         }
+
+        OnInventoryChanged?.Invoke();
     }
 
     public void RemoveItem(SOItem item)
@@ -50,13 +53,23 @@ public class SOInventory : ScriptableObject
             // If there's only one in inventory, delete the ItemAmount entirely. 
             else
             {
-                _itemAmounts.Remove(listItemAmount);
+                ItemAmounts.Remove(listItemAmount);
             }
+
+            OnInventoryChanged?.Invoke();
+            
             return;
         }
         else
         {
             Debug.LogWarning("Item to be removed not in inventory");
         }
+    }
+
+    // FOR TESTING
+    // Clear inventory when exiting play mode. 
+    public void ResetOnExitPlayMode()
+    {
+        ItemAmounts.Clear();
     }
 }

@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Armor Item", menuName = "Inventory/Armor Item")]
 public class SOArmorItem : SOEquipmentItem
 {
 	

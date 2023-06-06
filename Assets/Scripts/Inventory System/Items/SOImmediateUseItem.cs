@@ -6,9 +6,11 @@ public class SOImmediateUseItem : SOItem
 {
     public static event Action OnPickUpItem;
 
-    public override void PickUpItem()
+    public override void PickUpItem(InventoryManager inventoryManager)
     {
-        base.PickUpItem();
+        base.PickUpItem(inventoryManager);
+
+        Debug.Log($"Immediate Used {name}");
 
         OnPickUpItem?.Invoke();
     }
