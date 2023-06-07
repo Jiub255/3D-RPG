@@ -27,6 +27,7 @@ ________________________________________________________________________________
         Maybe do it in the normal gameworld instead. Looks kinda weird when you zoom out and the coulds stay the same.
             Make the clouds transparentable?
             Or just keep them high enough that the camera never goes above them. Probably this. 
+        Set the clouds to not cast or recieve shadows (not recieving might not be necessary). 
 
 
         Morrowind style menu
