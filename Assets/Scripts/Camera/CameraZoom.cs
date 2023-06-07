@@ -43,7 +43,7 @@ public class CameraZoom : MonoBehaviour
     {
         float wheelMovement = _zoomAction.ReadValue<float>();
 
-        Debug.Log($"wheel movement: {wheelMovement}");
+       // Debug.Log($"wheel movement: {wheelMovement}");
 
         Vector3 cameraZoomMovement = Vector3.forward * wheelMovement * _zoomSpeed * Time.unscaledDeltaTime;
 

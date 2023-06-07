@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
+    // Is this script necessary? Or just a pointless middle man?
+    // Could just send the events straight from the SOEquipmentItem to the SOEquipment. 
+    // Except SOEquipment is an SO, not a monobehaviour, so how to subscribe it to events? 
+
 	[SerializeField]
 	private SOEquipment _equipmentSO;
 
@@ -26,49 +30,4 @@ public class EquipmentManager : MonoBehaviour
     {
         _equipmentSO.Unequip(equipmentItem);
     }
-/*
-    public void Equip(SOEquipmentItem equipmentItem)
-    {
-        if (equipmentItem.GetType() == typeof(SOHelmetItem))
-        {
-            SOHelmetItem oldHelmet = _equipmentSO.HelmetItem;
-            if (oldHelmet != null)
-            {
-                Unequip(oldHelmet);
-            }
-            _equipmentSO.HelmetItem = (SOHelmetItem)equipmentItem;
-        }
-        else if (equipmentItem.GetType() == typeof(SOArmorItem))
-        {
-            _equipmentSO.ArmorItem = (SOArmorItem)equipmentItem;
-        }
-        else if (equipmentItem.GetType() == typeof(SOWeaponItem))
-        {
-            _equipmentSO.WeaponItem = (SOWeaponItem)equipmentItem;
-        }
-        else if (equipmentItem.GetType() == typeof(SOShieldItem))
-        {
-            _equipmentSO.ShieldItem = (SOShieldItem)equipmentItem;
-        }
-    }
-
-	public void Unequip(SOEquipmentItem equipmentItem)
-    {
-        if (equipmentItem.GetType() == typeof(SOHelmetItem))
-        {
-            _equipmentSO.HelmetItem = null;
-        }
-        else if (equipmentItem.GetType() == typeof(SOArmorItem))
-        {
-            _equipmentSO.ArmorItem = null;
-        }
-        else if (equipmentItem.GetType() == typeof(SOWeaponItem))
-        {
-            _equipmentSO.WeaponItem = null;
-        }
-        else if (equipmentItem.GetType() == typeof(SOShieldItem))
-        {
-            _equipmentSO.ShieldItem = null;
-        }
-    }*/
 }

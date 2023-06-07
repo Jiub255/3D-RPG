@@ -7,8 +7,6 @@ public class CameraMoveRotate : MonoBehaviour
 {
     public static event Action<Vector3, Vector3> OnRotatedCamera;
     
-    //public Transform PlayerTransform { get; set; }
-
     [SerializeField, Range(0f, 2f)]
     private float _rotationSpeed = 0.15f;
     [SerializeField, Range(0f, 40f)]
@@ -27,7 +25,7 @@ public class CameraMoveRotate : MonoBehaviour
     private InputAction _rotateCameraAction;
     private InputAction _mouseDeltaAction;
     private Vector3 _velocity = Vector3.zero;
-    private bool _rotating = true;
+    private bool _rotating = false;
 
     private void Start()
     { 
@@ -37,7 +35,9 @@ public class CameraMoveRotate : MonoBehaviour
         _rotateCameraAction = S.I.IM.PC.World.RotateCamera;
         _mouseDeltaAction = S.I.IM.PC.World.MouseDelta;
 
+        // Started toggles it to on, and then canceled toggles it back to off when you release the button. 
         S.I.IM.PC.World.RotateCamera.started += ToggleRotation;
+        S.I.IM.PC.World.RotateCamera.canceled += ToggleRotation;
 
         GetVectors();
     }
@@ -45,6 +45,7 @@ public class CameraMoveRotate : MonoBehaviour
     private void OnDisable()
     {
         S.I.IM.PC.World.RotateCamera.started -= ToggleRotation;
+        S.I.IM.PC.World.RotateCamera.canceled -= ToggleRotation;
     }
 
     private void Update()

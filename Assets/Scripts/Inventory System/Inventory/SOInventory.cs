@@ -37,6 +37,7 @@ public class SOInventory : ScriptableObject , IResettable
             ItemAmounts.Add(newItemAmount);
         }
 
+        // Heard by UIInventory, calls SetupSlots with the newly updated inventory SO. 
         OnInventoryChanged?.Invoke();
     }
 

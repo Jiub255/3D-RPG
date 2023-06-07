@@ -4,14 +4,14 @@ public class PlayerInventoryManager : InventoryManager
     private void OnEnable()
     {
         SOInventoryItem.OnAddItem += AddItem;
-        SOEquipment.OnUnequip += AddItem;
+       // SOEquipment.OnUnequip += AddItem;
         SOInventoryItem.OnRemoveItem += RemoveItem;
     }
 
     private void OnDisable()
     {
         SOInventoryItem.OnAddItem -= AddItem;
-        SOEquipment.OnUnequip -= AddItem;
+      //  SOEquipment.OnUnequip -= AddItem;
         SOInventoryItem.OnRemoveItem -= RemoveItem;
     }
 }

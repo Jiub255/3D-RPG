@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
  
 [CreateAssetMenu(fileName = "New Equipment Item", menuName = "Equipment/Equipment Item")]
@@ -9,6 +10,8 @@ public class SOEquipmentItem : SOInventoryItem
 
     // TODO - Do this instead of a bunch of subclasses? 
     public SOEquipmentType EquipmentType;
+
+   // public List<SOEquipmentStatBonus> StatBonuses;
 
     // Equip the item. Send signal to equipment and inventory managers. 
     // Called by "use" button on inventory slot prefab. 

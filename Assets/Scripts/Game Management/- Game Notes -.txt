@@ -16,6 +16,17 @@ ________________________________________________________________________________
         Not sure if I want to keep the different subclasses of SOEquipmentItem. 
             Maybe just do an enum or a SO enum-like thing. 
             Although this way makes each piece more independent, instead of them all having the same variables. 
+        Could just put the stats/special powers/whatever equipment specific data inside the SOEquipmentType class.
+            Kinda best of both worlds. 
+
+
+        Make a random cloud spawner in the skybox object.
+            Spawn random cloud, 
+            Cloud goes across skybox area,
+            Destroy (or disable) cloud. 
+        Maybe do it in the normal gameworld instead. Looks kinda weird when you zoom out and the coulds stay the same.
+            Make the clouds transparentable?
+            Or just keep them high enough that the camera never goes above them. Probably this. 
 
 
         Morrowind style menu
@@ -67,7 +78,10 @@ ________________________________________________________________________________
             UI object
         Starts scene music. 
 
-
+    Animated Skybox object on its own layer, and a skybox camera that only sees that layer. 
+        Have sun at angle orbiting starting at z=800.
+        Going to make random cloud spawner in a radius less than that so the sun will always be behind the clouds,
+            or I could make another camera and another layer and make sure the sun is rendered behind the other layers. 
 
                                                GAMEPLAY
                                                --------

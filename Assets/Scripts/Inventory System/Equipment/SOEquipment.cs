@@ -3,23 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Equipment/Equipment Inventory", fileName = "Equipment Inventory")]
-public class SOEquipment : ScriptableObject
+public class SOEquipment : ScriptableObject , IResettable
 {
 	public event Action OnEquipmentChanged;
-    public static event Action<SOEquipmentItem> OnUnequip;
-
-/*	public SOWeaponItem WeaponItem;
-	public SOArmorItem ArmorItem;
-	public SOHelmetItem HelmetItem;
-	public SOShieldItem ShieldItem;*/
 
 	public List<SOEquipmentItem> EquipmentItems;
 
-	public void Equip(SOEquipmentItem newItem) 
+	public void Equip(SOEquipmentItem newItem)
 	{
         SOEquipmentType type = newItem.EquipmentType;
 
-        // if there is something equipped in this slot, unequip it
+        // If there is something equipped in this slot, unequip it. 
         for (int i = 0; i < EquipmentItems.Count; i++)
         {
             if (type.name == EquipmentItems[i].EquipmentType.name)
@@ -30,7 +24,7 @@ public class SOEquipment : ScriptableObject
             }
         }
 
-        // add new item to equipSO
+        // Add new item to EquipmentItems. 
         EquipmentItems.Add(newItem);
 
         // UIEquipment listens. 
@@ -39,9 +33,15 @@ public class SOEquipment : ScriptableObject
 
     public void Unequip(SOEquipmentItem oldItem)
     {
+        // Remove old item from EquipmentItems. 
         EquipmentItems.Remove(oldItem);
 
-        // Heard by PlayerInventoryManager. 
-        OnUnequip?.Invoke(oldItem);
+        // UIEquipment listens. 
+        OnEquipmentChanged?.Invoke();
+    }
+
+    public void ResetOnExitPlayMode()
+    {
+        EquipmentItems.Clear();
     }
 }
