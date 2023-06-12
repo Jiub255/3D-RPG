@@ -80,15 +80,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""63a20958-03a7-4c9a-a2ca-db649e86d835"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -278,17 +269,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""ToggleInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""979712a8-9bcc-4fb8-96d6-848eebf4007a"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -320,7 +300,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_World_MousePosition = m_World.FindAction("MousePosition", throwIfNotFound: true);
         m_World_MovePlayer = m_World.FindAction("MovePlayer", throwIfNotFound: true);
         m_World_ToggleInventory = m_World.FindAction("ToggleInventory", throwIfNotFound: true);
-        m_World_Interact = m_World.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -386,7 +365,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_World_MousePosition;
     private readonly InputAction m_World_MovePlayer;
     private readonly InputAction m_World_ToggleInventory;
-    private readonly InputAction m_World_Interact;
     public struct WorldActions
     {
         private @PlayerControls m_Wrapper;
@@ -397,7 +375,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_World_MousePosition;
         public InputAction @MovePlayer => m_Wrapper.m_World_MovePlayer;
         public InputAction @ToggleInventory => m_Wrapper.m_World_ToggleInventory;
-        public InputAction @Interact => m_Wrapper.m_World_Interact;
         public InputActionMap Get() { return m_Wrapper.m_World; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -425,9 +402,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ToggleInventory.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleInventory;
                 @ToggleInventory.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleInventory;
                 @ToggleInventory.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleInventory;
-                @Interact.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_WorldActionsCallbackInterface = instance;
             if (instance != null)
@@ -450,9 +424,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ToggleInventory.started += instance.OnToggleInventory;
                 @ToggleInventory.performed += instance.OnToggleInventory;
                 @ToggleInventory.canceled += instance.OnToggleInventory;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -474,6 +445,5 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnMovePlayer(InputAction.CallbackContext context);
         void OnToggleInventory(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
     }
 }

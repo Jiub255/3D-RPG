@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class PickUpItem : InteractableTrigger
+public class PickUpItem : Interactable
 {
     [SerializeField]
     private SOItem _item;
 
-    public override void EnterInteractableZone(Collider collision)
+    public override void Interact(Collider collision)
     {
-        base.EnterInteractableZone(collision);
+        base.Interact(collision);
 
         _item.PickUpItem(collision.GetComponentInChildren<InventoryManager>());
 

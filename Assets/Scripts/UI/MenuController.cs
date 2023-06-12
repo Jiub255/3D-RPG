@@ -7,44 +7,28 @@ public class MenuController : MonoBehaviour
     public static event Action OnOpenInventory;
 
 	[SerializeField]
-	private GameObject _inventoryCanvas;
-    [SerializeField]
-    private GameObject _dialogCanvas;
+	private GameObject _inventoryMenu;
 
     private void Start()
     {
         S.I.IM.PC.World.ToggleInventory.started += ToggleInventory;
-        NPCDialog.OnInteractWithNPC += EnableDialogCanvas;
-        UIDialog.OnDialogEnd += DisableDialogCanvas;
     }
 
     private void OnDisable()
     {
         S.I.IM.PC.World.ToggleInventory.started -= ToggleInventory;
-        NPCDialog.OnInteractWithNPC -= EnableDialogCanvas;
-        UIDialog.OnDialogEnd -= DisableDialogCanvas;
-    }
-
-    private void EnableDialogCanvas()
-    {
-        _dialogCanvas.SetActive(true);
-    }
-
-    private void DisableDialogCanvas()
-    {
-        _dialogCanvas.SetActive(false);
     }
 
     private void ToggleInventory(InputAction.CallbackContext _)
     {
-        if (_inventoryCanvas.activeInHierarchy)
+        if (_inventoryMenu.activeInHierarchy)
         {
-            _inventoryCanvas.SetActive(false);
+            _inventoryMenu.SetActive(false);
         }
         else
         {
             OnOpenInventory?.Invoke();
-            _inventoryCanvas.SetActive(true);
+            _inventoryMenu.SetActive(true);
         }
     }
 }
