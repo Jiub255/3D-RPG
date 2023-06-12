@@ -15,3 +15,8 @@ MonoBehaviour:
   Description: helmet
   Icon: {fileID: 21300000, guid: 7b86a539750e1a44ca7ec5b7f690babd, type: 3}
   EquipmentType: {fileID: 11400000, guid: 0ec5a888eb2413648bb7432877d0e4c5, type: 2}
+  Bonuses:
+  - StatSO: {fileID: 11400000, guid: 26a76640c438e90409f71f91458c31d3, type: 2}
+    BonusAmount: 2
+  - StatSO: {fileID: 11400000, guid: 8ff89d027d9d1b84baaa6a2c5f2588a2, type: 2}
+    BonusAmount: 4

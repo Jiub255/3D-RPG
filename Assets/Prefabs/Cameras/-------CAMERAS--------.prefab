@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _follow: {fileID: 7948492585420591331}
   _lookAt: {fileID: 7948492584890231386}
-  _smoothTime: 0.3
+  _smoothTime: 0.05
 --- !u!1 &7948492585420591330
 GameObject:
   m_ObjectHideFlags: 0

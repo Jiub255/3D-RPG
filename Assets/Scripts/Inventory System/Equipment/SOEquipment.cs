@@ -27,7 +27,7 @@ public class SOEquipment : ScriptableObject , IResettable
         // Add new item to EquipmentItems. 
         EquipmentItems.Add(newItem);
 
-        // UIEquipment listens. 
+        // UIEquipment and StatManager listen. 
         OnEquipmentChanged?.Invoke();
     }
 
@@ -36,7 +36,7 @@ public class SOEquipment : ScriptableObject , IResettable
         // Remove old item from EquipmentItems. 
         EquipmentItems.Remove(oldItem);
 
-        // UIEquipment listens. 
+        // UIEquipment and StatManager listen. 
         OnEquipmentChanged?.Invoke();
     }
 

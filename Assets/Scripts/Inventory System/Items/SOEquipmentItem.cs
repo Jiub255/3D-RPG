@@ -11,6 +11,8 @@ public class SOEquipmentItem : SOInventoryItem
     // TODO - Do this instead of a bunch of subclasses? 
     public SOEquipmentType EquipmentType;
 
+    public List<EquipmentBonus> Bonuses;
+
    // public List<SOEquipmentStatBonus> StatBonuses;
 
     // Equip the item. Send signal to equipment and inventory managers. 

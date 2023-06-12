@@ -13,6 +13,13 @@ ________________________________________________________________________________
     FIRST!!
 
 
+
+        How to do combat?
+            Collider on weapon?
+            Or do a check sphere kind of thing in front of player? 
+            Fix attack animation or get another so that the sword swings. 
+        
+
         Not sure if I want to keep the different subclasses of SOEquipmentItem. 
             Maybe just do an enum or a SO enum-like thing. 
             Although this way makes each piece more independent, instead of them all having the same variables. 

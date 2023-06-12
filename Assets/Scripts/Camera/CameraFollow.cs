@@ -9,8 +9,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField]
     private Transform _lookAt;
 
-    [SerializeField, Range(0.1f, 1.0f)]
-    private float _smoothTime = 0.3f;
+    [SerializeField, Range(0.001f, 1.0f)]
+    private float _smoothTime = 0.1f;
 
     private Vector3 _velocity = Vector3.zero;
     private Transform _transform;
