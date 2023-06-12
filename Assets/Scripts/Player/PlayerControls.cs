@@ -89,6 +89,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Melee"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""298a0830-3566-43a4-8652-b0eb4dcc93a0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -289,6 +298,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8855ef38-2beb-456e-b14e-58906013add0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +341,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_World_MovePlayer = m_World.FindAction("MovePlayer", throwIfNotFound: true);
         m_World_ToggleInventory = m_World.FindAction("ToggleInventory", throwIfNotFound: true);
         m_World_Interact = m_World.FindAction("Interact", throwIfNotFound: true);
+        m_World_Melee = m_World.FindAction("Melee", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -387,6 +408,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_World_MovePlayer;
     private readonly InputAction m_World_ToggleInventory;
     private readonly InputAction m_World_Interact;
+    private readonly InputAction m_World_Melee;
     public struct WorldActions
     {
         private @PlayerControls m_Wrapper;
@@ -398,6 +420,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @MovePlayer => m_Wrapper.m_World_MovePlayer;
         public InputAction @ToggleInventory => m_Wrapper.m_World_ToggleInventory;
         public InputAction @Interact => m_Wrapper.m_World_Interact;
+        public InputAction @Melee => m_Wrapper.m_World_Melee;
         public InputActionMap Get() { return m_Wrapper.m_World; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -428,6 +451,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnInteract;
+                @Melee.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnMelee;
+                @Melee.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnMelee;
+                @Melee.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnMelee;
             }
             m_Wrapper.m_WorldActionsCallbackInterface = instance;
             if (instance != null)
@@ -453,6 +479,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Melee.started += instance.OnMelee;
+                @Melee.performed += instance.OnMelee;
+                @Melee.canceled += instance.OnMelee;
             }
         }
     }
@@ -475,5 +504,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMovePlayer(InputAction.CallbackContext context);
         void OnToggleInventory(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnMelee(InputAction.CallbackContext context);
     }
 }
