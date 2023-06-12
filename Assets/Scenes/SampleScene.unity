@@ -839,6 +839,67 @@ Transform:
   m_Father: {fileID: 924884432}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &636915103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 636915104}
+  - component: {fileID: 636915106}
+  - component: {fileID: 636915105}
+  m_Layer: 3
+  m_Name: Dialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &636915104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636915103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3670020130828225188}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &636915105
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636915103}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &636915106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636915103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c5ce515abae9b4d9456a2b297f33cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textAssetSO: {fileID: 11400000, guid: d397d3aed6267b049956f7fc18976da6, type: 2}
+  _npcDialogTextAsset: {fileID: 4900000, guid: 0359096e481c2d641a7010faf76defeb, type: 3}
 --- !u!4 &690655830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4388383215679704, guid: e377b882a13405d4b9d5c3e8e747595e, type: 3}
@@ -2493,7 +2554,7 @@ GameObject:
   - component: {fileID: 3670020130828225188}
   - component: {fileID: 3670020130828225192}
   - component: {fileID: 3670020130828225190}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Test NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2513,6 +2574,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3670020131484624647}
+  - {fileID: 636915104}
   m_Father: {fileID: 2134676257}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -133.663, z: 0}
