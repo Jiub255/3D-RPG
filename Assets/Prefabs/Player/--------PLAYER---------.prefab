@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6855025705919459430}
   - component: {fileID: 5395147111326684662}
+  - component: {fileID: 8794427252796689876}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -46,6 +47,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.51904064, y: 1.9297515, z: 0.2950469}
   m_Center: {x: 0.02328734, y: 1.0703962, z: -0.0049465066}
+--- !u!114 &8794427252796689876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341494264371367299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729d3e2b7bcd56247840555df7339c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackStatSO: {fileID: 11400000, guid: 63b263de3f1302b48be76ea1acfbd4d5, type: 2}
+  _knockbackStatSO: {fileID: 11400000, guid: 1299c55332fff6442a24e530ff9609cc, type: 2}
 --- !u!1 &7422589643088667841
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +133,7 @@ GameObject:
   - component: {fileID: 7422589643503788441}
   - component: {fileID: 7422589643503788442}
   - component: {fileID: 7422589643503788438}
+  - component: {fileID: 4699600838439813171}
   m_Layer: 6
   m_Name: --------PLAYER---------
   m_TagString: Untagged
@@ -199,6 +215,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerHealthSO: {fileID: 11400000, guid: 8886d06964f51e04e9b40206048e459a, type: 2}
   _maxHealthStatSO: {fileID: 11400000, guid: 9611b20718627cf4d85ce0448a9f911d, type: 2}
+--- !u!114 &4699600838439813171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7422589643503788444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ddd78fe48781742814e2b58272e43f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statsSO: {fileID: 11400000, guid: a0a96b02bf31ba24881911553f9dc246, type: 2}
+  _equipmentSO: {fileID: 11400000, guid: 9acc449587f88ca4fb5ade02e42018b6, type: 2}
 --- !u!1 &7422589643959043076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,6 +2089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1e528658a91f340a9ed94ec06f6008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerMeleeWeapon: {fileID: 8794427252796689876}
 --- !u!1 &7422589643959076116
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,9 @@ public class PlayerMelee : MonoBehaviour
 {
 	private Animator _animator;
 
+    [SerializeField]
+    private PlayerMeleeWeapon _playerMeleeWeapon;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -22,6 +25,12 @@ public class PlayerMelee : MonoBehaviour
 
     private void MeleeAttack(InputAction.CallbackContext context)
     {
+        _playerMeleeWeapon.EnableCollider();
         _animator.SetTrigger("Melee");
+    }
+
+    public void DisableCollider()
+    {
+        _playerMeleeWeapon.DisableCollider();
     }
 }

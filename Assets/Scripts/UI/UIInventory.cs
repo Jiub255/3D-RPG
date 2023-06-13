@@ -23,7 +23,7 @@ public class UIInventory : MonoBehaviour
 		MenuController.OnOpenInventory -= SetupInventorySlots;
 	}
 
-	public void SetupInventorySlots()
+	private void SetupInventorySlots()
 	{
 		Debug.Log("SetupInventorySlots called. ");
 

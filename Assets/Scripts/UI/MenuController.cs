@@ -5,14 +5,18 @@ using UnityEngine.InputSystem;
 public class MenuController : MonoBehaviour
 {
     public static event Action OnOpenInventory;
+    public static event Action OnOpenStatsMenu;
 
 	[SerializeField]
 	private GameObject _inventoryCanvas;
     [SerializeField]
     private GameObject _dialogCanvas;
+    [SerializeField]
+    private GameObject _statsCanvas;
 
     private void Start()
     {
+        S.I.IM.PC.World.ToggleStats.started += ToggleStatsMenu;
         S.I.IM.PC.World.ToggleInventory.started += ToggleInventory;
         NPCDialog.OnInteractWithNPC += EnableDialogCanvas;
         UIDialog.OnDialogEnd += DisableDialogCanvas;
@@ -20,9 +24,23 @@ public class MenuController : MonoBehaviour
 
     private void OnDisable()
     {
+        S.I.IM.PC.World.ToggleStats.started -= ToggleStatsMenu;
         S.I.IM.PC.World.ToggleInventory.started -= ToggleInventory;
         NPCDialog.OnInteractWithNPC -= EnableDialogCanvas;
         UIDialog.OnDialogEnd -= DisableDialogCanvas;
+    }
+
+    private void ToggleStatsMenu(InputAction.CallbackContext context)
+    {
+        if (_statsCanvas.activeInHierarchy)
+        {
+            _statsCanvas.SetActive(false);
+        }
+        else
+        {
+            _statsCanvas.SetActive(true);
+            OnOpenStatsMenu?.Invoke();
+        }
     }
 
     private void EnableDialogCanvas()
@@ -43,8 +61,8 @@ public class MenuController : MonoBehaviour
         }
         else
         {
-            OnOpenInventory?.Invoke();
             _inventoryCanvas.SetActive(true);
+            OnOpenInventory?.Invoke();
         }
     }
 }

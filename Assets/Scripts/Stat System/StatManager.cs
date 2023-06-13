@@ -7,7 +7,7 @@ public class StatManager : MonoBehaviour
 	public static event Action OnStatsChanged;
 
 	[SerializeField]
-	private List<SOStat> _statSOs;
+	private SOStats _statsSO;
 	[SerializeField]
 	private SOEquipment _equipmentSO;
 
@@ -18,7 +18,7 @@ public class StatManager : MonoBehaviour
 
     public SOStat NameToSOStat(string name)
     {
-        foreach (SOStat stat in _statSOs)
+        foreach (SOStat stat in _statsSO.StatSOs)
         {
             if (stat.name == name)
             {
@@ -33,17 +33,19 @@ public class StatManager : MonoBehaviour
     private void OnEnable()
     {
         _equipmentSO.OnEquipmentChanged += CalculateStatModifiers;
+        SOStat.OnStatChanged += CalculateStatModifiers;
     }
 
     private void OnDisable()
     {
         _equipmentSO.OnEquipmentChanged -= CalculateStatModifiers;
+        SOStat.OnStatChanged -= CalculateStatModifiers;
     }
 
     private void CalculateStatModifiers()
     {
         // Clear all modifiers on all stats. 
-        foreach (SOStat stat in _statSOs)
+        foreach (SOStat stat in _statsSO.StatSOs)
         {
             stat.ClearModifiers();
         }
@@ -57,7 +59,7 @@ public class StatManager : MonoBehaviour
             }
         }
     
-        // Heard by UIStats. 
-       // OnStatsChanged?.Invoke();
+        // Heard by UIStats and PlayerMeleeWeapon. 
+        OnStatsChanged?.Invoke();
     }
 }

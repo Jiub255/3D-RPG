@@ -11,5 +11,8 @@ public class TESTEnemyHitAnim : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-
+    public void GetHit()
+    {
+        _animator.SetTrigger("GetHit");
+    }
 }

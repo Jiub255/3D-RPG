@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "Hold",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleStats",
+                    "type": "PassThrough",
+                    "id": "e5128893-8888-4f5a-937c-c7b0aeaf90be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -285,6 +294,17 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96ab2bd2-45cf-4529-a30d-b19d352884d4",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "ToggleStats",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

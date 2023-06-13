@@ -98,6 +98,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ToggleStats"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e5128893-8888-4f5a-937c-c7b0aeaf90be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -309,6 +318,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""96ab2bd2-45cf-4529-a30d-b19d352884d4"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ToggleStats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -342,6 +362,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_World_ToggleInventory = m_World.FindAction("ToggleInventory", throwIfNotFound: true);
         m_World_Interact = m_World.FindAction("Interact", throwIfNotFound: true);
         m_World_Melee = m_World.FindAction("Melee", throwIfNotFound: true);
+        m_World_ToggleStats = m_World.FindAction("ToggleStats", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -409,6 +430,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_World_ToggleInventory;
     private readonly InputAction m_World_Interact;
     private readonly InputAction m_World_Melee;
+    private readonly InputAction m_World_ToggleStats;
     public struct WorldActions
     {
         private @PlayerControls m_Wrapper;
@@ -421,6 +443,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @ToggleInventory => m_Wrapper.m_World_ToggleInventory;
         public InputAction @Interact => m_Wrapper.m_World_Interact;
         public InputAction @Melee => m_Wrapper.m_World_Melee;
+        public InputAction @ToggleStats => m_Wrapper.m_World_ToggleStats;
         public InputActionMap Get() { return m_Wrapper.m_World; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -454,6 +477,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Melee.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnMelee;
                 @Melee.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnMelee;
                 @Melee.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnMelee;
+                @ToggleStats.started -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleStats;
+                @ToggleStats.performed -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleStats;
+                @ToggleStats.canceled -= m_Wrapper.m_WorldActionsCallbackInterface.OnToggleStats;
             }
             m_Wrapper.m_WorldActionsCallbackInterface = instance;
             if (instance != null)
@@ -482,6 +508,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Melee.started += instance.OnMelee;
                 @Melee.performed += instance.OnMelee;
                 @Melee.canceled += instance.OnMelee;
+                @ToggleStats.started += instance.OnToggleStats;
+                @ToggleStats.performed += instance.OnToggleStats;
+                @ToggleStats.canceled += instance.OnToggleStats;
             }
         }
     }
@@ -505,5 +534,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnToggleInventory(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
+        void OnToggleStats(InputAction.CallbackContext context);
     }
 }
