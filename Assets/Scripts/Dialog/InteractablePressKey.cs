@@ -26,12 +26,12 @@ public class InteractablePressKey : InteractableTrigger
 
     private void Start()
     {
-        S.I.IM.PC.World.Interact.canceled += Interact;
+        S.I.IM.PC.Movement.Interact.canceled += Interact;
     }
 
     private void OnDisable()
     {
-        S.I.IM.PC.World.Interact.canceled -= Interact;
+        S.I.IM.PC.Movement.Interact.canceled -= Interact;
     }
 
     public virtual void Interact(InputAction.CallbackContext context)

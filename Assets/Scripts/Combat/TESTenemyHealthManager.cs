@@ -10,7 +10,7 @@ public class TESTenemyHealthManager : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log($"{transform.root.name} died. ");
-        transform.root.gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 
     public void TakeDamage(int amount)

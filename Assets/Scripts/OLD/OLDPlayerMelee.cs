@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMelee : MonoBehaviour
+public class OLDPlayerMelee : MonoBehaviour
 {
 	private Animator _animator;
 
@@ -15,12 +15,12 @@ public class PlayerMelee : MonoBehaviour
 
     private void Start()
     {
-        S.I.IM.PC.World.Melee.started += MeleeAttack;
+        S.I.IM.PC.Movement.Melee.started += MeleeAttack;
     }
 
     private void OnDisable()
     {
-        S.I.IM.PC.World.Melee.started -= MeleeAttack;
+        S.I.IM.PC.Movement.Melee.started -= MeleeAttack;
     }
 
     private void MeleeAttack(InputAction.CallbackContext context)
@@ -29,6 +29,7 @@ public class PlayerMelee : MonoBehaviour
         _animator.SetTrigger("Melee");
     }
 
+    // Called from animation event? 
     public void DisableCollider()
     {
         _playerMeleeWeapon.DisableCollider();

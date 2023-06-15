@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class OLDPlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 10f;
@@ -21,38 +21,32 @@ public class PlayerMovement : MonoBehaviour
         _transform = transform;
         _forward = transform.forward;
         _right = transform.right;
-        _movePlayerAction = S.I.IM.PC.World.MovePlayer;
+        _movePlayerAction = S.I.IM.PC.Movement.MovePlayer;
         _rigidbody = GetComponent<Rigidbody>();
 
         CameraMoveRotate.OnRotatedCamera += GetVectors;
 
-        S.I.IM.PC.World.MovePlayer.started += (c) => _moving = true;
-        S.I.IM.PC.World.MovePlayer.canceled += (c) => _moving = false;
+        S.I.IM.PC.Movement.MovePlayer.started += (c) => _moving = true;
+        S.I.IM.PC.Movement.MovePlayer.canceled += (c) => _moving = false;
     }
 
     private void OnDisable()
     {
         CameraMoveRotate.OnRotatedCamera -= GetVectors;
    
-        S.I.IM.PC.World.MovePlayer.started -= (c) => _moving = true;
-        S.I.IM.PC.World.MovePlayer.canceled -= (c) => _moving = false;
-    }
-
-    private void Update()
-    {
-        if (_moving)
-        {
-            Vector2 movementInput = _movePlayerAction.ReadValue<Vector2>();
-
-            _movement = _forward * movementInput.y + _right * movementInput.x;
-            _movement.Normalize();
-        }
+        S.I.IM.PC.Movement.MovePlayer.started -= (c) => _moving = true;
+        S.I.IM.PC.Movement.MovePlayer.canceled -= (c) => _moving = false;
     }
 
     private void FixedUpdate()
     {
         if (_moving)
         {
+            // Get Input
+            Vector2 movementInput = _movePlayerAction.ReadValue<Vector2>();
+            _movement = _forward * movementInput.y + _right * movementInput.x;
+            _movement.Normalize();
+
             // Lerp instead of turn instantly. 
             Quaternion lookRotation = Quaternion.LookRotation(_movement);
             _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.fixedDeltaTime * _turnSpeed);

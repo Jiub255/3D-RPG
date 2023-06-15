@@ -16,16 +16,16 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-        S.I.IM.PC.World.ToggleStats.started += ToggleStatsMenu;
-        S.I.IM.PC.World.ToggleInventory.started += ToggleInventory;
+        S.I.IM.PC.UI.ToggleStats.started += ToggleStatsMenu;
+        S.I.IM.PC.UI.ToggleInventory.started += ToggleInventory;
         NPCDialog.OnInteractWithNPC += EnableDialogCanvas;
         UIDialog.OnDialogEnd += DisableDialogCanvas;
     }
 
     private void OnDisable()
     {
-        S.I.IM.PC.World.ToggleStats.started -= ToggleStatsMenu;
-        S.I.IM.PC.World.ToggleInventory.started -= ToggleInventory;
+        S.I.IM.PC.UI.ToggleStats.started -= ToggleStatsMenu;
+        S.I.IM.PC.UI.ToggleInventory.started -= ToggleInventory;
         NPCDialog.OnInteractWithNPC -= EnableDialogCanvas;
         UIDialog.OnDialogEnd -= DisableDialogCanvas;
     }

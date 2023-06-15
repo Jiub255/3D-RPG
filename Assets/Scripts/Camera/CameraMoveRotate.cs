@@ -31,21 +31,21 @@ public class CameraMoveRotate : MonoBehaviour
     { 
         _transform = transform;
 
-        _zoomAction = S.I.IM.PC.World.Zoom;
-        _rotateCameraAction = S.I.IM.PC.World.RotateCamera;
-        _mouseDeltaAction = S.I.IM.PC.World.MouseDelta;
+        _zoomAction = S.I.IM.PC.Camera.Zoom;
+        _rotateCameraAction = S.I.IM.PC.Camera.RotateCamera;
+        _mouseDeltaAction = S.I.IM.PC.Camera.MouseDelta;
 
         // Started toggles it to on, and then canceled toggles it back to off when you release the button. 
-        S.I.IM.PC.World.RotateCamera.started += ToggleRotation;
-        S.I.IM.PC.World.RotateCamera.canceled += ToggleRotation;
+        S.I.IM.PC.Camera.RotateCamera.started += ToggleRotation;
+        S.I.IM.PC.Camera.RotateCamera.canceled += ToggleRotation;
 
         GetVectors();
     }
 
     private void OnDisable()
     {
-        S.I.IM.PC.World.RotateCamera.started -= ToggleRotation;
-        S.I.IM.PC.World.RotateCamera.canceled -= ToggleRotation;
+        S.I.IM.PC.Camera.RotateCamera.started -= ToggleRotation;
+        S.I.IM.PC.Camera.RotateCamera.canceled -= ToggleRotation;
     }
 
     private void Update()

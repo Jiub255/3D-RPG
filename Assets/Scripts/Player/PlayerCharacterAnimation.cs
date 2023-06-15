@@ -9,7 +9,7 @@ public class PlayerCharacterAnimation : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _movePlayerAction = S.I.IM.PC.World.MovePlayer;
+        _movePlayerAction = S.I.IM.PC.Movement.MovePlayer;
     }
 
     private void FixedUpdate()

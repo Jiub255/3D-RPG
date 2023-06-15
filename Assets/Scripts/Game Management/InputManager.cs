@@ -8,8 +8,10 @@ public class InputManager : MonoBehaviour
     {
         PC = new PlayerControls();
 
-        // Enable "World" as default action map
+        // Enable default action maps. 
         PC.Disable();
-        PC.World.Enable();
+        PC.UI.Enable();
+        PC.Camera.Enable();
+        PC.Movement.Enable();
     }
 }
