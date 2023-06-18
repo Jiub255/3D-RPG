@@ -74,7 +74,7 @@ public class PlayerMeleeAttack : MonoBehaviour
                 Vector3 normalized = xzProjection.normalized;
                 Vector3 knockbackVector = normalized * _knockback;
                 Debug.Log($"Knockback vector: {knockbackVector}");
-                hit.GetComponentInChildren<TESTKnockback>().GetKnockedBack(knockbackVector);
+                hit.GetComponent<IKnockbackable>().GetKnockedBack(knockbackVector);
             }
         }
     }

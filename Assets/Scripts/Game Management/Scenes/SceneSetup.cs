@@ -20,7 +20,8 @@ public class SceneSetup : MonoBehaviour
 /*    [SerializeField]
     private AudioClip _sceneMusic;*/
 
-    private void Awake()
+    // Start instead of awake to give InputManager time to setup. 
+    private void Start()
     {
         // Instantiate player at starting position, and set the instance's transform in _playerInstanceSO. 
         _playerInstanceSO.PlayerInstanceTransform = Instantiate(_playerPrefab, _startingPosition.position, Quaternion.identity).transform;

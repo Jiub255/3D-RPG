@@ -20,7 +20,8 @@ public class EnemyController : StateRunner<EnemyController>, IKnockbackable
     // and cleaner than putting this in each individual state. 
     public void GetKnockedBack(Vector3 knockbackVector)
     {
-        _knockbackVector = knockbackVector;
-        ChangeState(typeof(SOEnemyKnockbackState));
+        /*        _knockbackVector = knockbackVector;
+                ChangeState(typeof(SOEnemyKnockbackState));*/
+        Debug.Log($"GetKnockedBack called on {gameObject.name}");
     }
 }

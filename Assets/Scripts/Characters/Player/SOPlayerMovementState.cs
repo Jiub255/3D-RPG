@@ -13,7 +13,6 @@ public class SOPlayerMovementState : SOState<PlayerCharacterController>
     private float _turnSpeed = 15f;
 
     private Transform _transform;
-    private Vector3 _movement;
     private Vector3 _forward;
     private Vector3 _right;
     private InputAction _movePlayerAction;
@@ -31,25 +30,25 @@ public class SOPlayerMovementState : SOState<PlayerCharacterController>
         // Reenable movement input.
         S.I.IM.PC.Movement.Enable();
 
+        // References
         _transform = parent.transform;
-/*        _forward = parent.transform.forward;
-        _right = parent.transform.right;*/
         _rigidbody = parent.GetComponent<Rigidbody>();
         _movePlayerAction = S.I.IM.PC.Movement.MovePlayer;
 
+        // Events
         CameraMoveRotate.OnRotatedCamera += GetVectors;
-
         S.I.IM.PC.Movement.MovePlayer.started += (c) => _moving = true;
         S.I.IM.PC.Movement.MovePlayer.canceled += (c) => _moving = false;
-
-        // Changed to cancel to try to fix bug. 
-        S.I.IM.PC.Movement.Melee.started/*canceled*/ += ChangeToAttackState;
+        S.I.IM.PC.Movement.Melee.started += ChangeToAttackState;
 
         // CameraMoveRotate hears this and sends back the GetVectors event. 
         OnEnteredMovementState?.Invoke();
 
         // Animation
-        _playerMovementAnimation = new(_runner.Animator, _movePlayerAction);
+        Animator animator = parent.Animator;
+        Debug.Log($"Animator null: {animator == null}");
+        Debug.Log($"InputAction: {_movePlayerAction.name}");
+        _playerMovementAnimation = new(animator, _movePlayerAction);
     }
 
     public override void FixedUpdate()
@@ -60,17 +59,17 @@ public class SOPlayerMovementState : SOState<PlayerCharacterController>
          //   Debug.Log($"Move action value: {_movePlayerAction.ReadValue<Vector2>()}");
             // Doing input in here instead of Update loop, hopefully to stop Quaternion.LookRotation() getting passed a zero vector after changing back to this state. 
             Vector2 movementInput = _movePlayerAction.ReadValue<Vector2>();
-            _movement = _forward * movementInput.y + _right * movementInput.x;
-            _movement.Normalize();
+            Vector3 movement = _forward * movementInput.y + _right * movementInput.x;
+            movement.Normalize();
 
             // Slerp look direction instead of turning instantly. 
-            if (_movement.sqrMagnitude > 0)
+            if (movement.sqrMagnitude > 0)
             {
-                Quaternion lookRotation = Quaternion.LookRotation(_movement);
+                Quaternion lookRotation = Quaternion.LookRotation(movement);
                 _transform.rotation = Quaternion.Slerp(_transform.rotation, lookRotation, Time.fixedDeltaTime * _turnSpeed);
 
                 // Move player. 
-                _rigidbody.MovePosition(_rigidbody.position + _movement * Time.fixedDeltaTime * _speed);
+                _rigidbody.MovePosition(_rigidbody.position + movement * Time.fixedDeltaTime * _speed);
             }
         }
 
@@ -80,18 +79,8 @@ public class SOPlayerMovementState : SOState<PlayerCharacterController>
 
     private void ChangeToAttackState(InputAction.CallbackContext context)
     {
-        // Doesn't help. 
-        //_movePlayerAction.Reset();
-
         // Change to AttackState after pressing attack button. 
         _runner.ChangeState(typeof(SOPlayerAttackState));
-    }
-
-    // TODO - Have ChangeToKnockbackState method get called by event from wherever it should. 
-    private void ChangeToKnockbackState()
-    {
-        // Change to KnockbackState after getting hit. 
-        //_runner.SetState(typeof(SOKnockbackState));
     }
 
     private void GetVectors(Vector3 forward, Vector3 right)
@@ -103,10 +92,8 @@ public class SOPlayerMovementState : SOState<PlayerCharacterController>
     public override void Exit()
     {
         CameraMoveRotate.OnRotatedCamera -= GetVectors;
-
         S.I.IM.PC.Movement.MovePlayer.started -= (c) => _moving = true;
         S.I.IM.PC.Movement.MovePlayer.canceled -= (c) => _moving = false;
-
         S.I.IM.PC.Movement.Melee.started -= ChangeToAttackState;
     }
 

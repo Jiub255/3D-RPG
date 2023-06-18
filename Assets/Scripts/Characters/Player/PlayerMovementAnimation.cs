@@ -10,13 +10,9 @@ public class PlayerMovementAnimation
     {
         _animator = animator;
         _movePlayerAction = movePlayerAction;
-    }
 
-/*    private void Start()
-    {
-        _animator = GetComponent<Animator>();
-        _movePlayerAction = S.I.IM.PC.Movement.MovePlayer;
-    }*/
+        Debug.Log($"PlayerMovementAnimation constructor called with {animator} and {movePlayerAction.name}");
+    }
 
     public void FixedUpdate()
     {
