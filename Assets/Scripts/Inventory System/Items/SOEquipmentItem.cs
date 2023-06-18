@@ -8,12 +8,11 @@ public class SOEquipmentItem : SOInventoryItem
     public static event Action<SOEquipmentItem> OnEquip;
     public static event Action<SOEquipmentItem> OnUnequip;
 
-    // TODO - Do this instead of a bunch of subclasses? 
     public SOEquipmentType EquipmentType;
 
     public List<EquipmentBonus> Bonuses;
 
-   // public List<SOEquipmentStatBonus> StatBonuses;
+    public GameObject EquipmentItemPrefab;
 
     // Equip the item. Send signal to equipment and inventory managers. 
     // Called by "use" button on inventory slot prefab. 

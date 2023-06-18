@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Equipment/Equipment Inventory", fileName = "Equipment Inventory")]
 public class SOEquipment : ScriptableObject , IResettable
 {
+    public static event Action<SOEquipmentItem> OnUnequip;
 	public event Action OnEquipmentChanged;
 
 	public List<SOEquipmentItem> EquipmentItems;
@@ -38,6 +39,9 @@ public class SOEquipment : ScriptableObject , IResettable
 
         // UIEquipment and StatManager listen. 
         OnEquipmentChanged?.Invoke();
+
+        // InventoryManager listens.
+        OnUnequip?.Invoke(oldItem);
     }
 
     public void ResetOnExitPlayMode()

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class OLDPlayerMovement : MonoBehaviour
 {
-    [SerializeField]
+/*    [SerializeField]
     private float _speed = 10f;
     [SerializeField]
     private float _turnSpeed = 15f;
@@ -59,5 +59,5 @@ public class OLDPlayerMovement : MonoBehaviour
     {
         _forward = forward;
         _right = right;
-    }
+    }*/
 }

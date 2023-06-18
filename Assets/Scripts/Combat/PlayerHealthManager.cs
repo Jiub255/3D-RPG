@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerHealthManager : MonoBehaviour, IHealable, IDamageable
 {
 	[SerializeField]
-	private SOPlayerHealth _playerHealthSO;
+	private SOHealth _playerHealthSO;
     [SerializeField]
     private SOStat _maxHealthStatSO;
 
@@ -39,7 +39,7 @@ public class PlayerHealthManager : MonoBehaviour, IHealable, IDamageable
 
     public void FullHeal()
     {
-        throw new NotImplementedException();
+        Debug.Log("FullHeal called in PlayerHealthManager");
     }
 
     public void TakeDamage(int amount)
@@ -54,7 +54,7 @@ public class PlayerHealthManager : MonoBehaviour, IHealable, IDamageable
 
     public void Die()
     {
-        Debug.Log("Died");
+        Debug.Log("You Died");
 
         // Send player death event. 
     }

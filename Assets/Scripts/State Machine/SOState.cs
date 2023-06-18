@@ -11,8 +11,8 @@ public abstract class SOState<T> : ScriptableObject where T : MonoBehaviour
 
     public abstract void CaptureInput();
     public abstract void Update();
+    // Use _runner.SetState() to change states. 
+    public abstract void CheckForStateChangeConditions();
     public abstract void FixedUpdate();
-    // Use parent.SetState() to change states. 
-    public abstract void ChangeState();
     public abstract void Exit();
 }

@@ -1,49 +1,52 @@
 -------------------------------------------------------------------------------------------------------
 
-
-                                        ____  ___  _   _
-                                        |      |    \ /   *
-                                        |--    |     X    *
-                                        |     _|_  _/ \_  
-
-
--------------------------------------------------------------------------------------------------------
-
-            State machine:
-                Player not moving if movement button held while entering MovementState. 
-                    Not sure why yet. 
-                Attack input not working on first click after entering MovementState, but works on second click every time. 
-                    Not sure why yet. 
-                Old animation event still trying to call method on PlayerMelee. Fix/change/remove it. 
+                                        _____  ___  _   _
+                                        |__     |    \ /   *
+                                        |       |     X    *
+                                        |      _|_  _/ \_  
+                                      -----------------------
 
 
-                
-_______________________________________________________________________________________________________
 
+
+
+---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
     
                                    ______   __    ___     ____
                                      |     /  \   |  \   /    \  *
                                      |    /    \  |   \  \    /  *
                                      |    \____/  |___/   \__/
+                                 ----------------------------------
 
 
--------------------------------------------------------------------------------------------------------
+        Make more things in the states into separate plain c# classes. Helps organize and clean up the code. 
+            Like how SOPlayerMovementState makes a PlayerMovementAnimation instance to deal with animation. 
+
 
         Combat System: 
-        Do CheckSphere at peak of attack animation to see if it hit. 
+        Do OverlapBox at peak of attack animation to see if it hit. 
+            Doing this with a serialized field timer, used to be through an animation event. 
+            Might try to make the animation event work again. Use a shared base attack class with the attack method? 
         General Setup:
             State machine, Movement, Attack, and Knockback states. 
             One melee attack
             One get hit animation
             Get knocked back by enemy attacks
             Knock back enemies
+        Still TODO:
+            KnockbackState
+            
+
+
+        Make a separate dialog camera that's closer up and aims at whoever you're talking to. Then make a decent dialog UI to go with it. 
 
 
         Make a random cloud spawner in the skybox object.
             Spawn random cloud, 
             Cloud goes across skybox area,
             Destroy (or disable) cloud. 
-        Maybe do it in the normal gameworld instead. Looks kinda weird when you zoom out and the coulds stay the same.
+        Maybe do it in the normal gameworld instead. Looks kinda weird when you zoom out and the clouds stay the same.
             Make the clouds transparentable?
             Or just keep them high enough that the camera never goes above them. Probably this. 
         Set the clouds to not cast or recieve shadows (not recieving might not be necessary). 
@@ -71,17 +74,15 @@ ________________________________________________________________________________
                 Or just do it straight Morrowind style?
 
 
-
--------------------------------------------------------------------------------------------------------
-
+---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
 
                                      ___     ____   _   _  ____  
                                      |  \   /    \  |\  |  |__   *
                                      |   \  \    /  | \ |  |     *
                                      |___/   \__/   |  \|  |___    
+                                   --------------------------------
 
-
--------------------------------------------------------------------------------------------------------
 
         Character movement
             3rd person
@@ -103,6 +104,8 @@ ________________________________________________________________________________
 
         Environment
             Sun with directional light orbits separate Skybox camera. Gives day/night cycle effect with fitting lighting. 
+            Put all navigation static objects in the "Navigation Static Objects" child object of Environment.
+                Go to Window/Navigation Static Setter and click the button to set all children, grandchildren, etc to navigation static. 
 
         Items
             Can pick up items from the ground and they go into your inventory. 
@@ -113,36 +116,71 @@ ________________________________________________________________________________
             SO stat system, controlled by StatManager. 
             Each stat has its own list of modifiers affecting it (so far only modified by equipment, but could do other things later). 
 
+        Have a "Scene Setup" object in every scene with the SceneSetup script attached. 
+            Instantiates:
+                Player
+                Cameras object
+                UI object
+            Starts scene music. 
+
+        Animated Skybox object on its own layer, and a skybox camera that only sees that layer. 
+            Have sun at angle orbiting starting at z = 800.
+            Going to make random cloud spawner in a radius less than that so the sun will always be behind the clouds,
+                or I could make another camera and another layer and make sure the sun is rendered behind the other layers. 
 
 
 ---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
 
+                        ___     __    _    _  ____  ____   _       __   _   _
+                       /   \    /\    |\  /|  |__   |   |  |       /\    \ /   *
+                      |    __  /--\   | \/ |  |     |__/   |      /--\    |    *
+                       \___/  /    \  |    |  |___  |      |___  /    \   |
+                    -------------------------------------------------------------
 
-                                             GAME OVERVIEW
-                                             -------------
-
-    Have a "Scene Setup" object in every scene with the SceneSetup script attached. 
-        Instantiates:
-            Player
-            Cameras object
-            UI object
-        Starts scene music. 
-
-    Animated Skybox object on its own layer, and a skybox camera that only sees that layer. 
-        Have sun at angle orbiting starting at z=800.
-        Going to make random cloud spawner in a radius less than that so the sun will always be behind the clouds,
-            or I could make another camera and another layer and make sure the sun is rendered behind the other layers. 
-
-                                               GAMEPLAY
-                                               --------
-
+    
+    No plan yet. Just making this for fun/practice so far. 
 
      
-    ------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
-    FIXED:
+                                _____  ___  _   _  ____  ___
+                                |__     |    \ /   |__   |  \   *
+                                |       |     X    |     |   \  *
+                                |      _|_  _/ \_  |___  |___/
+                              --------------------------------------
 
 
+        OverlapBox wasn't detecting enemy hits, because the collider was on a child object of the rigidbody's object. 
+        FIXED BY MOVING COLLIDER TO THE SAME OBJECT AS RIGIDBODY. 
 
 
+        State machine:
+            Player not moving if movement button held while entering MovementState. 
+                _movePlayerAction.ReadValue<Vector2>() is returning zero vector after coming back to movement state with movement held down. 
+                How to fix it?
+                Problem only happens if you're holding move while you attack. If you start an attack while not moving, then hold move while you 
+                    switch back to the movement state it works fine. 
+        FIXED BY CALLING movePlayerAction.Dispose();. CAUSES ERROR WARNINGS BUT THEY SEEM HARMLESS. 
+            Attack input not working on first click after entering MovementState, but works on second click every time. 
+                Not sure why yet. 
+                Changing the input from started to canceled fixed it. 
+                    Probably because the action map gets disabled so it never got a chance to reach canceled, which is why
+                        you had to push it again after entering movement state to let it finally reach a canceled state and reset. 
+                    Not sure why doing _meleeAction.Reset() didn't work though. 
+        ORIGINALLY FIXED BY CHANGING THE INPUT FROM STARTED TO CANCELED. 
+        FIXED BY CALLING meleeAction.Dispose();. CAUSES ERROR WARNINGS BUT THEY SEEM HARMLESS. CHANGED INPUT BACK TO STARTED SO 
+            NOW YOU CAN CONTINUALLY ATTACK IF YOU HOLD DOWN THE ATTACK KEY. 
+            Both have something to do with the first click not registering after entering MovementState. 
+                If you click first when entering state, then keep move held and click again, sometimes you'll keep moving 
+                    after reentering movement state. But sometimes not, no idea why. 
+        TRY UPDATING UNITY/THE INPUT SYSTEM AND SEE IF THE BUGS ARE FIXED YET. IDEALLY BETTER FIX THAN THIS ONE WITH THE WEIRD ERRORS. 
 
+
+        Bug fix for input actions not registering first push after disabling/reenabling action map seems to have caused the UI 
+            action map to stop working. 
+        FIXED BY CALLING S.I.IM.PC.Enable(); AFTER DISPOSING OF THE MOVEMENT ACTIONS IN SoAttackState. 
+
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------

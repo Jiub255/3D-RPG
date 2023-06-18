@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 
 public class OLDPlayerMelee : MonoBehaviour
 {
-	private Animator _animator;
+/*	private Animator _animator;
 
     [SerializeField]
-    private PlayerMeleeWeapon _playerMeleeWeapon;
+    private PlayerMeleeAttack _playerMeleeWeapon;
 
     private void Awake()
     {
@@ -33,5 +33,5 @@ public class OLDPlayerMelee : MonoBehaviour
     public void DisableCollider()
     {
         _playerMeleeWeapon.DisableCollider();
-    }
+    }*/
 }

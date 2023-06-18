@@ -59,7 +59,7 @@ public class StatManager : MonoBehaviour
             }
         }
     
-        // Heard by UIStats and PlayerMeleeWeapon. 
+        // Heard by UIStats and PlayerMeleeAttack. 
         OnStatsChanged?.Invoke();
     }
 }

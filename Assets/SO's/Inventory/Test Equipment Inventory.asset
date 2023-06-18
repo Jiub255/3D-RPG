@@ -12,8 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2311556e52ca4484983fafe879b6e61e, type: 3}
   m_Name: Test Equipment Inventory
   m_EditorClassIdentifier: 
-  WeaponItem: {fileID: 0}
-  ArmorItem: {fileID: 0}
-  HelmetItem: {fileID: 0}
-  ShieldItem: {fileID: 0}
   EquipmentItems: []
