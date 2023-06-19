@@ -24,6 +24,9 @@
                                  ----------------------------------
 
 
+        Change sun starting position so that it rotates around player if it's tilted. Gonna be mathy. 
+
+
         Make more things in the states into separate plain c# classes. Helps organize and clean up the code. 
             Like how SOPlayerMovementState makes a PlayerMovementAnimation instance to deal with animation. 
 
@@ -57,6 +60,10 @@
         Make a separate dialog camera that's closer up and aims at whoever you're talking to. Then make a decent dialog UI to go with it. 
             Make dialog camera object have its own audio listener and switch that too? Or does it matter? 
             Or put the audio listener on the player? And have sounds come from their proper source to get 3D sound? 
+
+
+        Keep audio listener on player, and have each object that makes a sound be the source, so that it sounds 3d. 
+            Need a whole different audio manager for this. How to control volume? Interfaces? Events? 
 
 
         Make a random cloud spawner in the skybox object.

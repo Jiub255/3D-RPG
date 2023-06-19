@@ -1,7 +1,35 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static event Action OnGameTimeMultiplierChanged;
+
+    [SerializeField]
+    private SOGameTime _gameTimeSO;
+
+    private void FixedUpdate()
+    {
+        _gameTimeSO.IncrementTime(Time.fixedDeltaTime);
+    }
+
+    public GameTime GetGameTime()
+    {
+        return _gameTimeSO.GetGameTime();
+    }
+
+    public float GetGameTimeMultiplier()
+    {
+        return _gameTimeSO.GameTimeMultiplier;
+    }
+
+    public void SetGameTimeMultiplier(float multiplier)
+    {
+        _gameTimeSO.GameTimeMultiplier = multiplier;
+        // SunOrbit listens to update its multiplier. 
+        OnGameTimeMultiplierChanged?.Invoke();
+    }
+
     public void Pause(bool pause)
     {
         Time.timeScale = pause ? 0 : 1;
