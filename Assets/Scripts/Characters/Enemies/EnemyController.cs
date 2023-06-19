@@ -1,18 +1,22 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 // Put "Any State" stuff in here?
 public class EnemyController : StateRunner<EnemyController>, IKnockbackable
 {
     public SOPlayerInstance PlayerInstanceSO;
-    protected Vector3 _knockbackVector;
+    public Vector3 KnockbackVector { get; protected set; }
     [HideInInspector]
-    public Animator Animator;
+    public Animator Animator { get; protected set; }
+    public NavMeshAgent NavMeshAgent { get; protected set; }
+
 
     protected override void Awake()
     {
-        base.Awake();
-
         Animator = GetComponentInChildren<Animator>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+
+        base.Awake();
     }
 
     // Gets called from PlayerMeleeAttack on hit. Searches for IKnockbackable and calls this method. 
@@ -20,8 +24,8 @@ public class EnemyController : StateRunner<EnemyController>, IKnockbackable
     // and cleaner than putting this in each individual state. 
     public void GetKnockedBack(Vector3 knockbackVector)
     {
-        /*        _knockbackVector = knockbackVector;
-                ChangeState(typeof(SOEnemyKnockbackState));*/
+        KnockbackVector = knockbackVector;
+        ChangeState(typeof(SOEnemyKnockbackState));
         Debug.Log($"GetKnockedBack called on {gameObject.name}");
     }
 }

@@ -4,8 +4,11 @@ using UnityEngine.InputSystem;
 
 public class NPCDialog : InteractablePressKey
 {
+    // TODO - Send NPC Transform through this action so dialog camera can LookAt it?
+    // TODO - Have player LookAt NPC when they interact, or make a collision box in front of player for interactions, 
+    // so they can't interact while facing away. 
     // Heard by MenuController. 
-    public static event Action OnInteractWithNPC;
+    public static event Action<Transform> OnInteractWithNPC;
 
     [SerializeField] 
     private SOTextAsset _textAssetSO;
@@ -18,7 +21,10 @@ public class NPCDialog : InteractablePressKey
 
         if (_playerInRange)
         {
-            OnInteractWithNPC?.Invoke();
+            // MenuController listens. 
+            // TODO - Set up dialog camera and have it listen for this too. 
+            // Have SOPlayerMovementState listen too, to look at NPC. 
+            OnInteractWithNPC?.Invoke(transform);
         }
     }
 

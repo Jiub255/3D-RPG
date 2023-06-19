@@ -10,8 +10,6 @@ public class PlayerMovementAnimation
     {
         _animator = animator;
         _movePlayerAction = movePlayerAction;
-
-        Debug.Log($"PlayerMovementAnimation constructor called with {animator} and {movePlayerAction.name}");
     }
 
     public void FixedUpdate()

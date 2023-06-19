@@ -7,6 +7,13 @@ public class SOEnemyIdleState : SOState<EnemyController>
     protected float _chaseRadius = 5f;
     protected float _chaseRadiusSquared { get { return _chaseRadius * _chaseRadius; } }
 
+    public override void Init(EnemyController parent)
+    {
+        base.Init(parent);
+
+        _runner.Animator.SetFloat("Speed", 0f);
+    }
+
     public override void CheckForStateChangeConditions()
     {
         // Check if player is within sight range. If so, change to EnemyApproachPlayerState. 

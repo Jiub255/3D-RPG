@@ -12,7 +12,7 @@ public class InteractablePressKey : InteractableTrigger
 
     private void CheckIfPlayerIsInRange()
     {
-        int playerLayerMask = LayerMask.NameToLayer("Player");
+        int playerLayerMask = LayerMask.NameToLayer("PlayerInteract");
         float colliderRadius = GetComponent<CapsuleCollider>().radius;
         if (Physics.CheckSphere(transform.position, colliderRadius, playerLayerMask))
         {

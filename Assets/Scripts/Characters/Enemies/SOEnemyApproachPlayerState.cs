@@ -8,13 +8,9 @@ public class SOEnemyApproachPlayerState : SOState<EnemyController>
     protected float _attackRadius = 2f;
     protected float _attackRadiusSquared { get { return _attackRadius * _attackRadius; } }
 
-    protected NavMeshAgent _navMeshAgent;
-
     public override void Init(EnemyController parent)
     {
         base.Init(parent);
-
-        _navMeshAgent = _runner.GetComponent<NavMeshAgent>();
 
         // Set animator bool to true.
         _runner.Animator.SetBool("ApproachingPlayer", true);
@@ -30,14 +26,18 @@ public class SOEnemyApproachPlayerState : SOState<EnemyController>
 
     public override void FixedUpdate() 
     { 
-        _navMeshAgent.SetDestination(_runner.PlayerInstanceSO.PlayerInstanceTransform.position);
+        _runner.NavMeshAgent.SetDestination(_runner.PlayerInstanceSO.PlayerInstanceTransform.position);
+        _runner.NavMeshAgent.transform.LookAt(_runner.PlayerInstanceSO.PlayerInstanceTransform.position);
+
+        // Set speed to between 0 and 1 based on percent of max speed. 
+        _runner.Animator.SetFloat("Speed", _runner.NavMeshAgent.velocity.magnitude / _runner.NavMeshAgent.speed);
     }
 
     public override void Exit() 
     {
         // Unset destination. Are both necessary? Could just ResetPath work? 
-        _navMeshAgent.isStopped = true;
-        _navMeshAgent.ResetPath();
+        _runner.NavMeshAgent.isStopped = true;
+        _runner.NavMeshAgent.ResetPath();
 
         // Set animator bool to false.
         _runner.Animator.SetBool("ApproachingPlayer", false);

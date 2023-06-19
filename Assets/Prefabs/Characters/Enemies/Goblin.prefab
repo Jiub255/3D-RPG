@@ -34,6 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6396018345530965514}
+  - {fileID: 516059249635729822}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -133.56, z: 0}
@@ -49,7 +50,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -77,10 +78,10 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 360
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -104,6 +105,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3eefb2adcdd9d1648aaa793bbdd777a4, type: 2}
   - {fileID: 11400000, guid: f4f203638ad210945935e9c2fbc38942, type: 2}
   - {fileID: 11400000, guid: 444f9ac6a72570841935cc0e5f068572, type: 2}
+  - {fileID: 11400000, guid: ad77dbc97cdfd5f4397b11231caaa633, type: 2}
   PlayerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
 --- !u!114 &6830987762799916731
 MonoBehaviour:
@@ -118,6 +120,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthSO: {fileID: 11400000, guid: 9933fa2dcf5c64c4c811c0d04212b9de, type: 2}
+--- !u!1 &3533580117021564029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516059249635729822}
+  m_Layer: 9
+  m_Name: Attack Box
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &516059249635729822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3533580117021564029}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.87, z: 0.51}
+  m_LocalScale: {x: 1.75, y: 1.69, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 721171792552828284}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6396018345531151342
 GameObject:
   m_ObjectHideFlags: 0
@@ -4024,6 +4057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6396018345530965514}
   - component: {fileID: 6396018345540734988}
+  - component: {fileID: 2541457863750926588}
   m_Layer: 9
   m_Name: Character_Goblin_Male
   m_TagString: Untagged
@@ -4083,6 +4117,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2541457863750926588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396018345531321020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62ff5687555fb74b85074d801be972c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackStatSO: {fileID: 11400000, guid: cb7e86e3e5ec1c140a6a961f9dc4248a, type: 2}
+  _knockbackStatSO: {fileID: 11400000, guid: 167005f52b8611145a601f9a7bfc152c, type: 2}
+  _attackBox: {fileID: 516059249635729822}
+  _targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &6396018345531321786
 GameObject:
   m_ObjectHideFlags: 0

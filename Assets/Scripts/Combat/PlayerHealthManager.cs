@@ -5,27 +5,15 @@ public class PlayerHealthManager : MonoBehaviour, IHealable, IDamageable
 {
 	[SerializeField]
 	private SOHealth _playerHealthSO;
-    [SerializeField]
-    private SOStat _maxHealthStatSO;
 
     private void OnEnable()
     {
-        // Set max health based on whichever stats. 
-        CalculateMaxHealth();
-
         SOEffectHeal.OnHealEffect += Heal;
-        StatManager.OnStatsChanged += CalculateMaxHealth;
     }
 
     private void OnDisable()
     {
         SOEffectHeal.OnHealEffect -= Heal;
-        StatManager.OnStatsChanged -= CalculateMaxHealth;
-    }
-
-    private void CalculateMaxHealth()
-    {
-        _playerHealthSO.MaxHealth = _maxHealthStatSO.GetValue();
     }
 
     public void Heal(int amount)
@@ -39,7 +27,7 @@ public class PlayerHealthManager : MonoBehaviour, IHealable, IDamageable
 
     public void FullHeal()
     {
-        Debug.Log("FullHeal called in PlayerHealthManager");
+        _playerHealthSO.CurrentHealth = _playerHealthSO.MaxHealth;
     }
 
     public void TakeDamage(int amount)

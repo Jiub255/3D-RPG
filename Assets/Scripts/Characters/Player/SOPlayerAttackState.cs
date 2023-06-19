@@ -4,16 +4,16 @@ using UnityEngine;
 public class SOPlayerAttackState : SOState<PlayerCharacterController>
 {
     [SerializeField]
-    private AnimationClip _attackAnimationClip;
-    private float _animationLength { get { return _attackAnimationClip.length; } }
+    protected AnimationClip _attackAnimationClip;
+    protected float _animationLength { get { return _attackAnimationClip.length; } }
     [SerializeField, Tooltip("In Seconds")]
-    private float _timeUntilAttack = 0.58f;
+    protected float _timeUntilAttack = 0.58f;
 
-    private float _timer;
-    private bool _hasAttacked;
+    protected float _timer;
+    protected bool _hasAttacked;
 
     // Gets player stat data for attack. 
-    private PlayerMeleeAttack _playerMeleeAttack;
+    protected PlayerMeleeAttack _playerMeleeAttack;
 
     public override void Init(PlayerCharacterController parent)
     {
@@ -24,15 +24,8 @@ public class SOPlayerAttackState : SOState<PlayerCharacterController>
         _playerMeleeAttack = _runner.GetComponentInChildren<PlayerMeleeAttack>();
 
         // TODO - Find better fix eventually. 
-        // Stupid fixes, need to be here so that the action gets "completed" and not stuck in progress
-        // or whatever was happening. 
-        // This fixes the bug but causes errors, other action maps wont work after.  
-        S.I.IM.PC.Movement.MovePlayer.Dispose();
-        S.I.IM.PC.Movement.Melee.Dispose();
-        S.I.IM.PC.Movement.Interact.Dispose();
-        // This fixes the bug introduced by the above bug fix. Fixception. I don't like it. Maybe try upgrading unity/input system instead? 
-        S.I.IM.PC.Enable();
-        //ACoupleOfStupidFixesThatIHate();
+        // Has to be here before disabling Movement action map. 
+        _runner.ACoupleOfStupidFixesThatIHate();
 
         // Disable movement input while attacking. 
         S.I.IM.PC.Movement.Disable();
@@ -63,11 +56,12 @@ public class SOPlayerAttackState : SOState<PlayerCharacterController>
         }
     }
 
-    private void ACoupleOfStupidFixesThatIHate() 
-    { 
+    public override void Exit() 
+    {
+        // Reenable movement input.
+        S.I.IM.PC.Movement.Enable();
     }
 
     public override void CaptureInput() {}
     public override void FixedUpdate() {}
-    public override void Exit() {}
 }

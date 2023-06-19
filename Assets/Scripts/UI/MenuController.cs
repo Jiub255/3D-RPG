@@ -43,7 +43,7 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    private void EnableDialogCanvas()
+    private void EnableDialogCanvas(Transform _)
     {
         _dialogCanvas.SetActive(true);
     }

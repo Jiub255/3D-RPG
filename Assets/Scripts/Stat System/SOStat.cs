@@ -6,13 +6,17 @@ public class SOStat : ScriptableObject
 {
     public static event System.Action OnStatChanged;
 
-    // Only serialized to see in inspector for now. 
     [SerializeField]
     protected int _baseValue;
-    [SerializeField]
-    protected List<int> _modifiers = new List<int>();
 
-    // Just to see in the inspector, has no real use. 
+    // Only serialized to see in the inspector. 
+# if UNITY_EDITOR
+    [SerializeField]
+# endif
+    protected List<int> _modifiers = new();
+
+    // Just to see in the inspector, variable has no real use. 
+    // TODO - Delete before building, waste of resources. 
     [SerializeField]
     protected int _moddedValue;
 
@@ -27,6 +31,7 @@ public class SOStat : ScriptableObject
     {
         _baseValue += amount;
         _moddedValue = GetValue();
+        // StatManager listens. 
         OnStatChanged?.Invoke();
     }
 

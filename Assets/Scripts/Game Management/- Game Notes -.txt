@@ -7,7 +7,11 @@
                                       -----------------------
 
 
-
+        Fix KnockbackState
+            Sometimes doesn't work when enemy is attacking. I think the attack animation needs to be 
+                stopped when leaving the attack state maybe. 
+            Also, sometimes enemy knocks player through the ground. Probably an issue with the AddForce. 
+                Maybe try another approach, like change _rigidbody.velocity like the enemies kind of. 
 
 
 ---------------------------------------------------------------------------------------------------------
@@ -35,11 +39,23 @@
             Get knocked back by enemy attacks
             Knock back enemies
         Still TODO:
-            KnockbackState
-            
+            Fix KnockbackState
+                Sometimes doesn't work when enemy is attacking. I think the attack animation needs to be stopped maybe. 
+            Setup a player and an enemy melee attack animation. Duplicates except their animation event calls the appropriate
+                MeleeAttack.CheckForHits();. Instead of using a timer in the attack states. 
+
+
+        Make it possible to equip two weapons. Have strong damaging weapons with weak knockback, like swords, and low damage 
+            but high knockback weapons, like maces. 
+            Make right click -> right hand weapon and left to left. So you can control which weapon to swing and be strategic. 
+            Can also equip a spell in either hand, not just limited to weapons. 
+            Have a few well designed, unique spells/weapons, not heaps of boring similar random loot. Like Zelda, not Diablo. 
 
 
         Make a separate dialog camera that's closer up and aims at whoever you're talking to. Then make a decent dialog UI to go with it. 
+            Send NPC Transform through this action so dialog camera can LookAt it?
+            Have player LookAt NPC when they interact, or make a collision box in front of player for interactions, 
+                so they can't interact while facing away. 
 
 
         Make a random cloud spawner in the skybox object.
@@ -110,6 +126,8 @@
         Items
             Can pick up items from the ground and they go into your inventory. 
             Usable items can be used and have whatever effect. 
+                For each new effect, just make a new SO class that extends SOEffect, and have it override ExecuteEffect and
+                    send an event to whichever script needs to hear it. 
             Equipment items can be equipped and stats are changed accordingly. 
 
         Stats System
@@ -139,7 +157,7 @@
                     -------------------------------------------------------------
 
     
-    No plan yet. Just making this for fun/practice so far. 
+        No plan yet. Just making this for fun/practice so far. 
 
      
 ----------------------------------------------------------------------------------------------------------
@@ -181,6 +199,12 @@
         Bug fix for input actions not registering first push after disabling/reenabling action map seems to have caused the UI 
             action map to stop working. 
         FIXED BY CALLING S.I.IM.PC.Enable(); AFTER DISPOSING OF THE MOVEMENT ACTIONS IN SoAttackState. 
+
+
+        Character controllers weren't getting their references from characters because they were being gotten before _SOState.Awake(), 
+            where the _runner reference is grabbed. 
+        FIXED BY GETTING REFERENCES AFTER BASE.AWAKE. 
+
 
 ----------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------

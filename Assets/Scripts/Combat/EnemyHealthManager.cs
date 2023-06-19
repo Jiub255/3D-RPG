@@ -3,7 +3,12 @@ using UnityEngine;
 public class EnemyHealthManager : MonoBehaviour, IDamageable
 {
 	[SerializeField]
-	private SOHealth _healthSO;
+	protected SOHealth _healthSO;
+
+    protected virtual void Awake()
+    {
+        _healthSO.CurrentHealth = _healthSO.MaxHealth;
+    }
 
     public void Die()
     {
@@ -19,10 +24,5 @@ public class EnemyHealthManager : MonoBehaviour, IDamageable
             _healthSO.CurrentHealth = 0;
             Die();
         }
-    }
-
-    private void Awake()
-    {
-        _healthSO.CurrentHealth = _healthSO.MaxHealth;
     }
 }

@@ -12,6 +12,7 @@ public class SOEffectHeal : SOEffect
     {
         Debug.Log("Heal effect called");
 
+        // PlayerHealthManager listens. 
         OnHealEffect?.Invoke(HealAmount);
     }
 }

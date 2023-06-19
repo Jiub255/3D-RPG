@@ -14,7 +14,7 @@ public class InteractableTrigger : MonoBehaviour
         Debug.Log($"Left {gameObject.name}'s Interactable Zone");
     }
 
-    // Put interactable colliders on a separate sub object that is in a layer that only collides with the player. 
+    // Put interactable colliders on a separate sub object that is in a layer that only collides with the PlayerInteract Layer. 
     private void OnTriggerEnter(Collider otherCollider)
     {
         EnterInteractableZone(otherCollider);

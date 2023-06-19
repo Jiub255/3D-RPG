@@ -31,13 +31,13 @@ public class UIDialog : MonoBehaviour
         StartDialog();
     }
 
-    public void StartDialog()
+    private void StartDialog()
     {
         SetStory();
         RefreshView();
     }
 
-    public void SetStory()
+    private void SetStory()
     {
         if (_textAssetSO.TextAsset)
         {
@@ -49,7 +49,7 @@ public class UIDialog : MonoBehaviour
         }
     }
 
-    public void RefreshView()
+    private void RefreshView()
     {
         while (_story.canContinue)
         {
@@ -115,7 +115,7 @@ public class UIDialog : MonoBehaviour
         }
     }
 
-    public virtual void Choose(int choice)
+    private void Choose(int choice)
     {
         _story.ChooseChoiceIndex(choice);
 
