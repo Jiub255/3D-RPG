@@ -25,10 +25,12 @@ public class SOPlayerAttackState : SOState<PlayerCharacterController>
 
         // TODO - Find better fix eventually. 
         // Has to be here before disabling Movement action map. 
-        _runner.ACoupleOfStupidFixesThatIHate();
+/*        _runner.ACoupleOfStupidFixesThatIHate();
 
         // Disable movement input while attacking. 
-        S.I.IM.PC.Movement.Disable();
+        S.I.IM.PC.Movement.Disable();*/
+
+        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
 
         // Start attack animation. 
         _runner.Animator.SetTrigger("Melee");

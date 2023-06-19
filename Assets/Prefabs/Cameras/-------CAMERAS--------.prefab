@@ -99,7 +99,7 @@ MonoBehaviour:
   _rotationSpeed: 0.15
   _rotationXMin: 7
   _rotationXMax: 90
-  _smoothTime: 0.3
+  _smoothTime: 0.209
   _playerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
 --- !u!1 &7948492585250103992
 GameObject:
@@ -193,10 +193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6aca1f1aadb734eb698fea2692fc5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zoomSpeed: 20
-  _zoomMinDist: 3
-  _zoomMaxDist: 100
-  _defaultZoomDist: 15
+  _zoomSpeed: 4
+  _zoomMinDist: 5
+  _zoomMaxDist: 30
+  _defaultZoomDist: 13
 --- !u!1 &7948492585969422929
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7948492585969422929}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &7948492585969422933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,4 +478,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
-  _offset: {x: 0.81, y: 1.8, z: -1.21}

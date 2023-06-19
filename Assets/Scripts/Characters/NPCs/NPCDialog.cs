@@ -4,10 +4,6 @@ using UnityEngine.InputSystem;
 
 public class NPCDialog : InteractablePressKey
 {
-    // TODO - Send NPC Transform through this action so dialog camera can LookAt it?
-    // TODO - Have player LookAt NPC when they interact, or make a collision box in front of player for interactions, 
-    // so they can't interact while facing away. 
-    // Heard by MenuController. 
     public static event Action<Transform> OnInteractWithNPC;
 
     [SerializeField] 
@@ -15,15 +11,20 @@ public class NPCDialog : InteractablePressKey
     [SerializeField] 
     private TextAsset _npcDialogTextAsset;
 
+    private Transform _playerTransform;
+
     public override void Interact(InputAction.CallbackContext context)
     {
         base.Interact(context);
 
         if (_playerInRange)
         {
-            // MenuController listens. 
-            // TODO - Set up dialog camera and have it listen for this too. 
-            // Have SOPlayerMovementState listen too, to look at NPC. 
+            // Look at player.
+            transform.parent.LookAt(_playerTransform.position);
+
+            // MenuController listens to open dialog UI. 
+            // CameraManager listens and changes to dialog camera and has camera look at NPC.
+            // SOPlayerMovementState listens to look at NPC. 
             OnInteractWithNPC?.Invoke(transform);
         }
     }
@@ -32,9 +33,9 @@ public class NPCDialog : InteractablePressKey
     {
         base.EnterInteractableZone(collision);
 
-        // TODO - Put question mark above NPC's head.
+        _playerTransform = collision.transform.parent;
 
-        // TODO - Disable movement (and camera?) controls. 
+        // TODO - Put question mark above NPC's head.
 
     }
 
@@ -43,8 +44,6 @@ public class NPCDialog : InteractablePressKey
         base.LeaveInteractionZone(otherCollider);
 
         // TODO - Disable question mark. 
-
-        // TODO - Reenable movement/camera controls. 
 
     }
 }

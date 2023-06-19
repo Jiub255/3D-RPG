@@ -10,7 +10,7 @@ public class SOEnemyKnockbackState : SOState<EnemyController>
     [SerializeField]
     protected float _knockbackDuration = 0.5f;
     protected float _timer;
-    //protected Rigidbody _rigidbody;\
+//    protected Rigidbody _rigidbody;\
 
     protected float _speed;
     protected float _angularSpeed;
@@ -22,8 +22,10 @@ public class SOEnemyKnockbackState : SOState<EnemyController>
 
         _timer = 0f;
 
-        //_rigidbody = _runner.GetComponent<Rigidbody>();
-        // _rigidbody.AddForce(_runner.KnockbackVector, ForceMode.Impulse);
+//        EnemyHealthManager.OnEnemyDied += () => { _runner.Animator.SetBool("Dead", true); };
+
+//        _rigidbody = _runner.GetComponent<Rigidbody>();
+//        _rigidbody.AddForce(_runner.KnockbackVector, ForceMode.Impulse);
 
         // TODO - Use _runner.NavMeshAgent to do knockback. Set velocity in knockback direction and disable rotation and/or other properties. 
         // Save original values of NavMeshAgent. 
@@ -44,9 +46,17 @@ public class SOEnemyKnockbackState : SOState<EnemyController>
     public override void CheckForStateChangeConditions()
     {
         _timer += Time.deltaTime;
+        // Why is it transitioning to dead state after one hit, even though the animator bool stays false? 
         if (_timer > _knockbackDuration)
         {
-            _runner.ChangeState(typeof(SOEnemyIdleState));
+           // if (!_runner.Animator.GetBool("Dead"))
+            {
+                _runner.ChangeState(typeof(SOEnemyIdleState));
+            }
+/*            else
+            {
+                _runner.ChangeState(typeof(SOEnemyDeadState));
+            }*/
         }
     }
 
@@ -61,13 +71,22 @@ public class SOEnemyKnockbackState : SOState<EnemyController>
         _runner.NavMeshAgent.speed = 10;
         _runner.NavMeshAgent.angularSpeed = 0;//Keeps the enemy facing forwad rther than spinning
         _runner.NavMeshAgent.acceleration = 20;
+
+        // Set velocity to zero to lessen sliding. 
+        // Set velocity to zero if enemy died. 
+//        if (_runner.Animator.GetBool("Dead"))
+        {
+            _runner.NavMeshAgent.velocity = Vector3.zero;
+        }
+
+//         EnemyHealthManager.OnEnemyDied -= () => { _runner.Animator.SetBool("Dead", true); };
     }
 
     public override void CaptureInput() {}
     public override void Update() {}
 
     // Attempt at a smoother knockback. Might try again later. 
-    /*    private IEnumerator KnockbackCoroutine(Vector3 knockbackVector)
+/*        private IEnumerator KnockbackCoroutine(Vector3 knockbackVector)
     {
         float timer = 0f;
         while (timer < _knockbackDuration)

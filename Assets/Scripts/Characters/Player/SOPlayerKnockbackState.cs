@@ -16,8 +16,10 @@ public class SOPlayerKnockbackState : SOState<PlayerCharacterController>
         _runner.Rigidbody.AddForce(_runner.KnockbackVector, ForceMode.Impulse);
 
         // Have to do this before disabling movement. Terrible bug fix. 
-        _runner.ACoupleOfStupidFixesThatIHate();
-        S.I.IM.PC.Movement.Disable();
+/*        _runner.ACoupleOfStupidFixesThatIHate();
+        S.I.IM.PC.Movement.Disable();*/
+
+        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
 
         // Animation
         _runner.Animator.SetTrigger("GetHit");

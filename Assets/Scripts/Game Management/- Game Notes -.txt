@@ -32,6 +32,7 @@
         Do OverlapBox at peak of attack animation to see if it hit. 
             Doing this with a serialized field timer, used to be through an animation event. 
             Might try to make the animation event work again. Use a shared base attack class with the attack method? 
+                NO. Just use a duplicate animation with its own animation event for enemies. 
         General Setup:
             State machine, Movement, Attack, and Knockback states. 
             One melee attack
@@ -43,6 +44,7 @@
                 Sometimes doesn't work when enemy is attacking. I think the attack animation needs to be stopped maybe. 
             Setup a player and an enemy melee attack animation. Duplicates except their animation event calls the appropriate
                 MeleeAttack.CheckForHits();. Instead of using a timer in the attack states. 
+            Copy loot system from BetterRPG. But make it better. 
 
 
         Make it possible to equip two weapons. Have strong damaging weapons with weak knockback, like swords, and low damage 
@@ -53,9 +55,8 @@
 
 
         Make a separate dialog camera that's closer up and aims at whoever you're talking to. Then make a decent dialog UI to go with it. 
-            Send NPC Transform through this action so dialog camera can LookAt it?
-            Have player LookAt NPC when they interact, or make a collision box in front of player for interactions, 
-                so they can't interact while facing away. 
+            Make dialog camera object have its own audio listener and switch that too? Or does it matter? 
+            Or put the audio listener on the player? And have sounds come from their proper source to get 3D sound? 
 
 
         Make a random cloud spawner in the skybox object.
@@ -90,6 +91,12 @@
                 Or just do it straight Morrowind style?
 
 
+        Either pause time in dialog, or make it so attacks take you out of dialog. 
+            Pausing for now. Might want to do something else later so the characters still do their idle animation and 
+                trees sway and stuff while you're in dialog. 
+                Maybe just freeze the enemies somehow? 
+
+
 ---------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------
 
@@ -116,7 +123,12 @@
             Inventory menu
             Equipment menu
             Stats menu
-            Dialog menu, uses Inkle. Going to fully redesign the look, but the functionality is there. 
+
+        Dialog
+            Uses Inkle. Going to fully redesign the look, but the functionality is there. 
+            Separate dialog camera over the player's shoulder to have a better view. 
+                Should I put an AudioListener on it and switch it on when switching between cameras?
+                Will the sound not sound right if I don't or will it matter? 
 
         Environment
             Sun with directional light orbits separate Skybox camera. Gives day/night cycle effect with fitting lighting. 
@@ -193,12 +205,10 @@
             Both have something to do with the first click not registering after entering MovementState. 
                 If you click first when entering state, then keep move held and click again, sometimes you'll keep moving 
                     after reentering movement state. But sometimes not, no idea why. 
-        TRY UPDATING UNITY/THE INPUT SYSTEM AND SEE IF THE BUGS ARE FIXED YET. IDEALLY BETTER FIX THAN THIS ONE WITH THE WEIRD ERRORS. 
-
-
         Bug fix for input actions not registering first push after disabling/reenabling action map seems to have caused the UI 
             action map to stop working. 
         FIXED BY CALLING S.I.IM.PC.Enable(); AFTER DISPOSING OF THE MOVEMENT ACTIONS IN SoAttackState. 
+        TRY UPDATING UNITY/THE INPUT SYSTEM AND SEE IF THE BUGS ARE FIXED YET. IDEALLY BETTER FIX THAN THIS ONE WITH THE WEIRD ERRORS. 
 
 
         Character controllers weren't getting their references from characters because they were being gotten before _SOState.Awake(), 

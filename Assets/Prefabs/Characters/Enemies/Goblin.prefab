@@ -106,6 +106,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4f203638ad210945935e9c2fbc38942, type: 2}
   - {fileID: 11400000, guid: 444f9ac6a72570841935cc0e5f068572, type: 2}
   - {fileID: 11400000, guid: ad77dbc97cdfd5f4397b11231caaa633, type: 2}
+  - {fileID: 11400000, guid: aedbd1f02a9bebf44a8594373395a4d4, type: 2}
   PlayerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
 --- !u!114 &6830987762799916731
 MonoBehaviour:

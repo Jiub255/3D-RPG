@@ -19,6 +19,7 @@ public class CameraMoveRotate : MonoBehaviour
     private SOPlayerInstance _playerInstanceSO;
 
     private Transform _transform;
+    private Transform _playerTransform;
     private Vector3 _forward;
     private Vector3 _right;
     private InputAction _zoomAction;
@@ -30,6 +31,7 @@ public class CameraMoveRotate : MonoBehaviour
     private void Start()
     { 
         _transform = transform;
+        _playerTransform = _playerInstanceSO.PlayerInstanceTransform;
 
         _zoomAction = S.I.IM.PC.Camera.Zoom;
         _rotateCameraAction = S.I.IM.PC.Camera.RotateCamera;
@@ -50,12 +52,15 @@ public class CameraMoveRotate : MonoBehaviour
 
     private void Update()
     {
+        // Raise the position up to the player's head level. 
+        Vector3 target = new Vector3(_playerTransform.position.x, _playerTransform.position.y + 1f, _playerTransform.position.z);
+
         _transform.position = Vector3.SmoothDamp(
             _transform.position,
-            _playerInstanceSO.PlayerInstanceTransform.position,
+            target,
             ref _velocity,
             _smoothTime,
-            /*_maxSpeed*/Mathf.Infinity,
+            Mathf.Infinity,
             Time.unscaledDeltaTime);
     }
 
@@ -70,7 +75,7 @@ public class CameraMoveRotate : MonoBehaviour
         // isolated frames, but it helps resolve some issues with moving while zooming.
         if (!_zoomAction.WasPerformedThisFrame())
         {
-            if (_rotating/*_rotateCameraAction.IsPressed()*/)
+            if (_rotating)
             {
                 GetVectors();
                 RotateCamera();

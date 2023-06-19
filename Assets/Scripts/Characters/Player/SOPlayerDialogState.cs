@@ -10,9 +10,12 @@ public class SOPlayerDialogState : SOState<PlayerCharacterController>
 
         UIDialog.OnDialogEnd += ChangeToMovementState;
 
-        _runner.ACoupleOfStupidFixesThatIHate();
+/*        _runner.ACoupleOfStupidFixesThatIHate();
         S.I.IM.PC.Movement.Disable();
-        S.I.IM.PC.UI.Disable();
+        S.I.IM.PC.UI.Disable();*/
+
+        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
+        S.I.IM.DisableActionMap(S.I.IM.PC.UI);
     }
 
     public override void Exit()

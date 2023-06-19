@@ -51,13 +51,8 @@ public class MeleeAttack : MonoBehaviour
         {
             Debug.Log($"Hit {hit.name}");
 
-            // Attack damage. 
-            if (hit.GetComponent<IDamageable>() != null)
-            {
-                hit.GetComponent<IDamageable>().TakeDamage(_attack);
-            }
-
             // Knockback
+            // Do knockback before damage so knockback state can be entered before dying. 
             if (hit.GetComponent<IKnockbackable>() != null)
             {
                 Vector3 direction = hit.transform.position - transform.parent.position;
@@ -66,6 +61,12 @@ public class MeleeAttack : MonoBehaviour
                 Vector3 knockbackVector = normalized * _knockbackForce;
                 Debug.Log($"Knockback vector: {knockbackVector}");
                 hit.GetComponent<IKnockbackable>().GetKnockedBack(knockbackVector);
+            }
+
+            // Attack damage. 
+            if (hit.GetComponent<IDamageable>() != null)
+            {
+                hit.GetComponent<IDamageable>().TakeDamage(_attack);
             }
         }
     }

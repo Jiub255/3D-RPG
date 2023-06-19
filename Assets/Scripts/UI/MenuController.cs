@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,12 +15,18 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     private GameObject _statsCanvas;
 
+    private GameManager _gameManager;
+    private PlayerControls _playerControls;
+
     private void Start()
     {
         S.I.IM.PC.UI.ToggleStats.started += ToggleStatsMenu;
         S.I.IM.PC.UI.ToggleInventory.started += ToggleInventory;
         NPCDialog.OnInteractWithNPC += EnableDialogCanvas;
         UIDialog.OnDialogEnd += DisableDialogCanvas;
+
+        _gameManager = S.I.GameManager;
+        _playerControls = S.I.IM.PC;
     }
 
     private void OnDisable()
@@ -35,22 +42,41 @@ public class MenuController : MonoBehaviour
         if (_statsCanvas.activeInHierarchy)
         {
             _statsCanvas.SetActive(false);
+            Pause(false);
+            _playerControls.Movement.Enable();
         }
         else
         {
             _statsCanvas.SetActive(true);
             OnOpenStatsMenu?.Invoke();
+            Pause(true);
         }
     }
 
+    private void Pause(bool pause)
+    {
+        _gameManager.Pause(pause);
+    }
+
+    // Wait one frame to let the dialog camera line up.
+    // Not sure if it helped. 
     private void EnableDialogCanvas(Transform _)
     {
         _dialogCanvas.SetActive(true);
+       Pause(true);
+//        StartCoroutine(WaitThenPause());
+    }
+
+    private IEnumerator WaitThenPause()
+    {
+        yield return new WaitForEndOfFrame();
+        Pause(true);
     }
 
     private void DisableDialogCanvas()
     {
         _dialogCanvas.SetActive(false);
+        Pause(false);
     }
 
     private void ToggleInventory(InputAction.CallbackContext _)
@@ -58,11 +84,13 @@ public class MenuController : MonoBehaviour
         if (_inventoryCanvas.activeInHierarchy)
         {
             _inventoryCanvas.SetActive(false);
+            Pause(false);
         }
         else
         {
             _inventoryCanvas.SetActive(true);
             OnOpenInventory?.Invoke();
+            Pause(true);
         }
     }
 }

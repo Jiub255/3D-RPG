@@ -14,7 +14,7 @@ public class PlayerCharacterController : StateRunner<PlayerCharacterController>,
         Rigidbody = GetComponent<Rigidbody>();
 
         base.Awake();
-    }
+    }   
 
     public void GetKnockedBack(Vector3 knockbackVector)
     {
@@ -23,15 +23,16 @@ public class PlayerCharacterController : StateRunner<PlayerCharacterController>,
         Debug.Log("GetKnockedBack called on PlayerCharacterController");
     }
 
-    public void ACoupleOfStupidFixesThatIHate()
+/*    public void ACoupleOfStupidFixesThatIHate()
     {
-        // Stupid fixes, need to be here so that the action gets "completed" and not stuck in progress
+        // Stupid fixes, need to do this before disabling action maps so that an
+        // in progress action gets "completed" and not stuck in progress
         // or whatever was happening. 
         // This fixes the bug but causes errors, other action maps wont work after.  
         S.I.IM.PC.Movement.MovePlayer.Dispose();
         S.I.IM.PC.Movement.Melee.Dispose();
         S.I.IM.PC.Movement.Interact.Dispose();
-        // This fixes the bug introduced by the above bug fix. Fixception. I don't like it. Maybe try upgrading unity/input system instead? 
+        // This fixes the bug introduced by the above bug fix. I don't like it. Maybe try upgrading unity/input system instead? 
         S.I.IM.PC.Enable();
-    }
+    }*/
 }

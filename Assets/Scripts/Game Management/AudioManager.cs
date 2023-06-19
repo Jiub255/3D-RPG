@@ -4,6 +4,9 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField]
     private AudioSource _musicSource;
+    // Could break this up into multiple categories of SFX, 
+    // like footsteps, voices, combat, etc. And each could
+    // have its own slider to control its volume. 
     [SerializeField]
     private AudioSource _sfxSource;
 
@@ -28,5 +31,21 @@ public class AudioManager : MonoBehaviour
             _musicSource.clip = musicClip;
             _musicSource.Play();
         }
+    }
+
+    // Volume goes from 0 to 1. Hook up to a slider in UI.
+    public void ChangeMainVolume(float volume)
+    {
+        AudioListener.volume = volume;
+    }
+
+    public void ChangeMusicVolume(float volume)
+    {
+        _musicSource.volume = volume;
+    }
+
+    public void ChangeSFXVolume(float volume)
+    {
+        _sfxSource.volume = volume;
     }
 }
