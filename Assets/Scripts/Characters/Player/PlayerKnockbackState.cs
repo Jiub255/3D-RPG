@@ -1,23 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "States/Player/Knockback State", fileName = "Player Knockback State")]
-public class SOPlayerKnockbackState : SOState<PlayerCharacterController>
+public class PlayerKnockbackState : State<PlayerCharacterController2>
 {
-    [SerializeField]
     protected float _knockbackDuration = 0.5f;
     protected float _timer;
     protected NavMeshAgent _navMeshAgent;
+    protected Rigidbody _rigidbody;
     protected float _speed;
     protected float _angularSpeed;
     protected float _acceleration;
 
-    public override void Init(PlayerCharacterController parent)
+    public PlayerKnockbackState(PlayerCharacterController2 parent, float knockbackDuration) : base(parent)
     {
-        base.Init(parent);
+        _knockbackDuration = knockbackDuration;
 
         _timer = 0f;
         _navMeshAgent = _runner.NavMeshAgent;
+        _rigidbody = _runner.GetComponent<Rigidbody>();   
 
         // Save original values of NavMeshAgent. 
         _speed = _navMeshAgent.speed;
@@ -29,24 +29,21 @@ public class SOPlayerKnockbackState : SOState<PlayerCharacterController>
         // Keeps the enemy facing forwad instead of spinning. 
         _navMeshAgent.angularSpeed = 0;
         _navMeshAgent.acceleration = 20;
-        //        _runner.Rigidbody.AddForce(_runner.KnockbackVector, ForceMode.Impulse);
 
-        // Have to do this before disabling movement. Terrible bug fix. 
-        /*        _runner.ACoupleOfStupidFixesThatIHate();
-                S.I.IM.PC.Movement.Disable();*/
 
-        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
+        // Disable movement input while being knocked back. 
+//        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
 
         // Animation
         _runner.Animator.SetTrigger("GetHit");
     }
 
-    public override void CheckForStateChangeConditions()
+    public override void Update() 
     {
         _timer += Time.deltaTime;
         if (_timer > _knockbackDuration)
         {
-            _runner.ChangeState(typeof(SOPlayerMovementState));
+            _runner.ChangeState2(_runner.Movement());
         }
     }
 
@@ -58,7 +55,7 @@ public class SOPlayerKnockbackState : SOState<PlayerCharacterController>
     public override void Exit() 
     {
         // Reenable movement input.
-        S.I.IM.PC.Movement.Enable();
+//        S.I.IM.PC.Movement.Enable();
 
         // Set back to default settings. 
         _navMeshAgent.speed = _speed;
@@ -67,8 +64,8 @@ public class SOPlayerKnockbackState : SOState<PlayerCharacterController>
 
         // Set velocity to zero to lessen sliding. 
         _navMeshAgent.velocity = Vector3.zero;
-    }
 
-    public override void CaptureInput() {}
-    public override void Update() {}
+        // Set rigidbody rotation to zero to stop spinning.
+        _rigidbody.angularVelocity = Vector3.zero;
+    }
 }

@@ -13,7 +13,7 @@ public class PlayerAttackState : State<PlayerCharacterController2>
         _timer = 0f;
 
         // Disable movement input while attacking. 
-        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
+//        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
 
         // Start attack animation. 
         _runner.Animator.SetTrigger("Melee");
@@ -28,7 +28,7 @@ public class PlayerAttackState : State<PlayerCharacterController2>
     public override void Exit() 
     {
         // Reenable movement input.
-        S.I.IM.PC.Movement.Enable();
+//        S.I.IM.PC.Movement.Enable();
     }
 
     public override void Update() 

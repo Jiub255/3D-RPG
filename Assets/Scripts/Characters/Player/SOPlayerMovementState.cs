@@ -47,9 +47,6 @@ public class SOPlayerMovementState : SOState<PlayerCharacterController>
         // Animation
         Animator animator = parent.Animator;
         _playerMovementAnimation = new(animator, _movePlayerAction);
-
-        // Reenable Nav Mesh Agent rotation after knockback. Stops player rotating after being hit. 
-        _navMeshAgent.updateRotation = true;
     }
 
     public override void FixedUpdate()

@@ -2,21 +2,24 @@
 using UnityEngine.AI;
 
 // Put "Any State" stuff in here?
-public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController2>
+public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController2>, IKnockbackable
 {
-    // Movement state variables
     [SerializeField, Header("Movement State Variables")]
     protected float _speed = 10f;
     [SerializeField]
     protected float _turnSpeed = 15f;
     public SOVectors VectorsSO;
 
-    // Attack state variables
     [SerializeField, Header("Attack State Variables")]
     protected AnimationClip _attackAnimationClip;
 
+    [SerializeField, Header("Knockback State Variables")]
+    protected float _knockbackDuration = 0.5f;
+
     public Animator Animator { get; protected set; }
     public NavMeshAgent NavMeshAgent { get; protected set; }
+    public Vector3 KnockbackVector { get; protected set; }
+
 
     protected override void Awake()
     {
@@ -28,7 +31,14 @@ public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController
         _activeState = Movement();
         
 //        base.Awake();
-    }   
+    }
+
+    public void GetKnockedBack(Vector3 knockbackVector)
+    {
+        KnockbackVector = knockbackVector;
+        ChangeState2(Knockback());
+        Debug.Log("GetKnockedBack called on PlayerCharacterController");
+    }
 
     public State<PlayerCharacterController2> Movement()
     {
@@ -41,5 +51,9 @@ public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController
     public State<PlayerCharacterController2> Dialog()
     {
         return new PlayerDialogState(this);
+    }
+    public State<PlayerCharacterController2> Knockback()
+    {
+        return new PlayerKnockbackState(this, _knockbackDuration);
     }
 }
