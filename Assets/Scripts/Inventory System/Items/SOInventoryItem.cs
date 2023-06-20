@@ -6,13 +6,14 @@ public class SOInventoryItem : SOItem
     public static event Action<SOInventoryItem> OnRemoveItem;
     public static event Action<SOInventoryItem> OnAddItem;
 
-    public override void PickUpItem(InventoryManager inventoryManager)
+    public override void PickUpItem(/*InventoryManager inventoryManager*/)
     {
-        base.PickUpItem(inventoryManager);
+        base.PickUpItem(/*inventoryManager*/);
 
         Debug.Log($"Added {name} to inventory. ");
 
-		inventoryManager.AddItem(this);
+        AddToInventory();
+//		inventoryManager.AddItem(this);
     }
 
     public override void UseItem()

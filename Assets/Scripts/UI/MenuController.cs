@@ -14,6 +14,8 @@ public class MenuController : MonoBehaviour
     private GameObject _dialogCanvas;
     [SerializeField]
     private GameObject _statsCanvas;
+    [SerializeField]
+    private GameObject _lootCanvas;
 
     private GameManager _gameManager;
     private PlayerControls _playerControls;
@@ -24,6 +26,7 @@ public class MenuController : MonoBehaviour
         S.I.IM.PC.UI.ToggleInventory.started += ToggleInventory;
         NPCDialog.OnInteractWithNPC += EnableDialogCanvas;
         UIDialog.OnDialogEnd += DisableDialogCanvas;
+        EnemyLoot.OnLootsSOChanged += ToggleLootMenu;
 
         _gameManager = S.I.GameManager;
         _playerControls = S.I.IM.PC;
@@ -35,6 +38,12 @@ public class MenuController : MonoBehaviour
         S.I.IM.PC.UI.ToggleInventory.started -= ToggleInventory;
         NPCDialog.OnInteractWithNPC -= EnableDialogCanvas;
         UIDialog.OnDialogEnd -= DisableDialogCanvas;
+        EnemyLoot.OnLootsSOChanged -= ToggleLootMenu;
+    }
+
+    private void ToggleLootMenu()
+    {
+        _lootCanvas.SetActive(!_lootCanvas.activeInHierarchy);
     }
 
     private void ToggleStatsMenu(InputAction.CallbackContext context)

@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35a5b9b8f2e85774f8ba458d3d316a94, type: 3}
-  m_Name: Goblin Health SO
+  m_Script: {fileID: 11500000, guid: 1ce14c19fd687b049882f57996597b20, type: 3}
+  m_Name: Loot SO
   m_EditorClassIdentifier: 
-  MaxHealth: 3
-  CurrentHealth: 444
+  CurrentLootList: []

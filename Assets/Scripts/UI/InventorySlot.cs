@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     [SerializeField]
-    private Image _iconImage;
+    protected Image _iconImage;
     [SerializeField]
-    private TextMeshProUGUI _amountText;
+    protected TextMeshProUGUI _amountText;
 
-    private ItemAmount _itemAmount;
+    protected ItemAmount _itemAmount;
 
     public void SetupSlot(ItemAmount newItemAmount)
     {

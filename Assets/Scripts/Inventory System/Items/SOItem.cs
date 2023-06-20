@@ -11,7 +11,9 @@ public class SOItem : ScriptableObject
 		Debug.Log($"Used {name}"); 
     }
 
-	public virtual void PickUpItem(InventoryManager inventoryManager)
+	// TODO - Do I need to be passing around the inventoryManager reference? 
+	// Or can it be done without? 
+	public virtual void PickUpItem(/*InventoryManager inventoryManager*/)
     {
 		Debug.Log($"Picked up {name}");
     }

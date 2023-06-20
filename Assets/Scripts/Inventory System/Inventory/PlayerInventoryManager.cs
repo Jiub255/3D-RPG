@@ -7,6 +7,7 @@ public class PlayerInventoryManager : InventoryManager
         SOInventoryItem.OnAddItem += AddItem;
         SOEquipment.OnUnequip += AddItem;
         SOInventoryItem.OnRemoveItem += RemoveItem;
+        LootSlot.OnItemAmountLooted += AddItemAmount;
     }
 
     private void OnDisable()
@@ -14,5 +15,19 @@ public class PlayerInventoryManager : InventoryManager
         SOInventoryItem.OnAddItem -= AddItem;
         SOEquipment.OnUnequip -= AddItem;
         SOInventoryItem.OnRemoveItem -= RemoveItem;
+        LootSlot.OnItemAmountLooted -= AddItemAmount;
+    }
+
+    private void AddItemAmount(ItemAmount itemAmount)
+    {
+        ItemAmount inventoryItemAmount = _inventorySO.Contains(itemAmount.Item);
+        if (inventoryItemAmount != null)
+        {
+            inventoryItemAmount.Amount += itemAmount.Amount;
+        }
+        else
+        {
+            _inventorySO.ItemAmounts.Add(itemAmount);
+        }
     }
 }

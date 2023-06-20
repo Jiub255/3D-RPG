@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementState : State<PlayerCharacterController2>/*, IMovementActions*/ // How to use this interface?
 {
-    public static event Action OnEnteredMovementState;
+//    public static event Action OnEnteredMovementState;
 
     [SerializeField]
     protected float _speed = 10f;

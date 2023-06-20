@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 // Put this on Camera Focal Point
 public class CameraMoveRotate : MonoBehaviour
 {
-    public static event Action<Vector3, Vector3> OnRotatedCamera;
+//    public static event Action<Vector3, Vector3> OnRotatedCamera;
     
     [SerializeField, Range(0f, 2f)]
     private float _rotationSpeed = 0.15f;

@@ -9,7 +9,7 @@ public class SOInventory : ScriptableObject , IResettable
 
 	public List<ItemAmount> ItemAmounts;
 
-	private ItemAmount Contains(SOItem item)
+	public ItemAmount Contains(SOItem item)
     {
         foreach (ItemAmount itemAmount in ItemAmounts)
         {

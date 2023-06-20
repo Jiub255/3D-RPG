@@ -7,6 +7,9 @@
                                       -----------------------
 
 
+        Finish Loot System. 
+
+
         Clicking while in UI "loads up" an attack which goes off once you go back to the game. 
             Need to disable movement controls or make a new UI state. 
 
