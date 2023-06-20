@@ -13,8 +13,6 @@ public class PlayerMovementState : State<PlayerCharacterController2>
     protected float _turnSpeed = 15f;
 
     protected Transform _transform;
-/*    protected Vector3 _forward;
-    protected Vector3 _right;*/
     protected InputAction _movePlayerAction;
     protected bool _moving = false;
     protected NavMeshAgent _navMeshAgent;
