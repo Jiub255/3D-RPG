@@ -1,13 +1,17 @@
+using System;
 using UnityEngine;
 
 public class SunOrbit : MonoBehaviour
 {
+    // TODO - Change sun starting position so that it rotates around player if it's tilted. Gonna be mathy.
+    // Based off of _rotationAngle and _sunDistance. 
     [SerializeField]
-    // Earth on the equinox? solstice? On the equator? Not really sure.  
+    private float _sunDistance = 800f;
+
+    [SerializeField]
     private float _rotationAngle = 23.4f;
-    // Translates angle into a rotation axis for RotateAround. 
-    // TODO - Change sun starting position so that it rotates around player if it's tilted. Gonna be mathy. 
     private Vector3 _rotationAxis { get { return new Vector3(1f, Mathf.Tan(_rotationAngle * Mathf.Deg2Rad), 0f); } }
+
     private float _rotationSpeed { get { return _gameTimeMultiplier / 240f; } }
 
 	private Transform _transform;
@@ -19,17 +23,29 @@ public class SunOrbit : MonoBehaviour
 
         GameManager.OnGameTimeMultiplierChanged += UpdateGameTimeMultiplier;
 
-        // TODO - Set sun position so that it rotates around player, based off rotation angle/axis.
-    }
-
-    private void OnDisable()
-    {
-        GameManager.OnGameTimeMultiplierChanged -= UpdateGameTimeMultiplier;
+        SetSunStartingPosition();
     }
 
     private void Start()
     {
         UpdateGameTimeMultiplier();
+
+        Debug.Log($"Rotation Angle: {_rotationAngle}");
+        Debug.Log($"Rotation Axis: {_rotationAxis}");
+    }
+
+    // Sets sun at noon position based on rotation angle and sun distance. 
+    private void SetSunStartingPosition()
+    {
+        _transform.position = new Vector3(
+            -1 * _sunDistance * Mathf.Sin(_rotationAngle * Mathf.Deg2Rad), 
+            _sunDistance * Mathf.Cos(_rotationAngle * Mathf.Deg2Rad), 
+            0f);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameTimeMultiplierChanged -= UpdateGameTimeMultiplier;
     }
 
     private void UpdateGameTimeMultiplier()

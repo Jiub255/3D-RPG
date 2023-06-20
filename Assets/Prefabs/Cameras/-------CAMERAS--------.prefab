@@ -101,6 +101,7 @@ MonoBehaviour:
   _rotationXMax: 90
   _smoothTime: 0.209
   _playerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
+  _vectorsSO: {fileID: 11400000, guid: 6ee65e9736678cf44826dea09520179f, type: 2}
 --- !u!1 &7948492585250103992
 GameObject:
   m_ObjectHideFlags: 0

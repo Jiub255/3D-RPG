@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d40610e11aead45a771bef96f511d9, type: 3}
   m_Name: Enemy Knockback State
   m_EditorClassIdentifier: 
+  _knockbackDuration: 0.25

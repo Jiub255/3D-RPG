@@ -7,11 +7,11 @@ public class NPCDialog : InteractablePressKey
     public static event Action<Transform> OnInteractWithNPC;
 
     [SerializeField] 
-    private SOTextAsset _textAssetSO;
+    protected SOTextAsset _textAssetSO;
     [SerializeField] 
-    private TextAsset _npcDialogTextAsset;
-
-    private Transform _playerTransform;
+    protected TextAsset _npcDialogTextAsset;
+    [SerializeField]
+    protected SOPlayerInstance _playerInstanceSO;
 
     public override void Interact(InputAction.CallbackContext context)
     {
@@ -20,7 +20,7 @@ public class NPCDialog : InteractablePressKey
         if (_playerInRange)
         {
             // Look at player.
-            transform.parent.LookAt(_playerTransform.position);
+            transform.parent.LookAt(_playerInstanceSO.PlayerInstanceTransform.position);
 
             // MenuController listens to open dialog UI. 
             // CameraManager listens and changes to dialog camera and has camera look at NPC.
@@ -29,11 +29,9 @@ public class NPCDialog : InteractablePressKey
         }
     }
 
-    public override void EnterInteractableZone(Collider collision)
+    public override void EnterInteractableZone(Collider otherCollider)
     {
-        base.EnterInteractableZone(collision);
-
-        _playerTransform = collision.transform.parent;
+        base.EnterInteractableZone(otherCollider);
 
         // TODO - Put question mark above NPC's head.
 

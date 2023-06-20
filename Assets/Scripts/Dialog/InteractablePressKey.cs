@@ -5,33 +5,39 @@ public class InteractablePressKey : InteractableTrigger
 {
     protected bool _playerInRange = false;
 
-    private void Awake()
+    [SerializeField]
+    protected LayerMask _playerInteractLayerMask;
+
+    protected void Awake()
     {
         CheckIfPlayerIsInRange();
     }
 
-    private void CheckIfPlayerIsInRange()
+    protected void CheckIfPlayerIsInRange()
     {
-        int playerLayerMask = LayerMask.NameToLayer("PlayerInteract");
-        float colliderRadius = GetComponent<CapsuleCollider>().radius;
-        if (Physics.CheckSphere(transform.position, colliderRadius, playerLayerMask))
+        int playerInteractLayerMask = LayerMask.NameToLayer("PlayerInteract");
+        float colliderRadius = GetComponent<SphereCollider>().radius;
+        Debug.Log($"Collider radius: {colliderRadius}, PlayerLayerMask int: {playerInteractLayerMask}");
+        if (Physics.CheckSphere(transform.position, colliderRadius, _playerInteractLayerMask))
         {
             _playerInRange = true;
+            Debug.Log("Player in range");
         }
         else
         {
             _playerInRange = false;
+            Debug.Log("Player not in range");
         }
     }
 
-    private void Start()
+    protected void Start()
     {
-        S.I.IM.PC.Movement.Interact.canceled += Interact;
+        S.I.IM.PC.Movement.Interact./*canceled*/performed += Interact;
     }
 
     private void OnDisable()
     {
-        S.I.IM.PC.Movement.Interact.canceled -= Interact;
+        S.I.IM.PC.Movement.Interact./*canceled*/performed -= Interact;
     }
 
     public virtual void Interact(InputAction.CallbackContext context)

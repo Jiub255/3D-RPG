@@ -7,11 +7,17 @@
                                       -----------------------
 
 
+        Made new state machine, same as old except uses plain c# classes instead of SO's. 
+            Basically back to where I started though. 
+            Want to try using the PlayerControls script interfaces (at the end of the script) to give each state class
+                only the action maps it needs, and only implement the methods it needs. 
+            Hopefully since a new class is being created each time you switch, there won't be any need to disable or
+                re-enable the actions, which is what is causing all this trouble. 
+
+
         Fix KnockbackState
             Sometimes doesn't work when enemy is attacking. I think the attack animation needs to be 
                 stopped when leaving the attack state maybe. 
-            Also, sometimes enemy knocks player through the ground. Probably an issue with the AddForce. 
-                Maybe try another approach, like change _rigidbody.velocity like the enemies kind of. 
 
 
 ---------------------------------------------------------------------------------------------------------
@@ -24,7 +30,10 @@
                                  ----------------------------------
 
 
-        Change sun starting position so that it rotates around player if it's tilted. Gonna be mathy. 
+        FIGURE OUT BUG.
+            Changed movement action map actions from hold interaction to none, and all their events as performed instead of started or canceled.
+            Got rid of the ugly fix stuff in GameManager.DisableActionMap. 
+            Pretty much works now, except you need to press attack before it all works for some reason. 
 
 
         Make more things in the states into separate plain c# classes. Helps organize and clean up the code. 
@@ -117,6 +126,9 @@
         Character movement
             3rd person
             Changeable camera angle
+            Done using NavMeshAgent.velocity instead of Rigidbody.MovePosition.
+                Helps with knockback control, not falling through the ground, and not letting enemies push you around with their colliders. 
+                Much better than rigidbody style. 
 
         Camera
             Rotate camera with mouse
@@ -138,7 +150,11 @@
                 Will the sound not sound right if I don't or will it matter? 
 
         Environment
-            Sun with directional light orbits separate Skybox camera. Gives day/night cycle effect with fitting lighting. 
+            Sun with directional light orbits separate Skybox camera. 
+                Gives day/night cycle effect with direction light and sun rotating around origin.
+                Set sun's initial position to where it should be at noon based on distance and angle.
+                    Also start the gametime at noon, 43200 seconds. 
+
             Put all navigation static objects in the "Navigation Static Objects" child object of Environment.
                 Go to Window/Navigation Static Setter and click the button to set all children, grandchildren, etc to navigation static. 
 

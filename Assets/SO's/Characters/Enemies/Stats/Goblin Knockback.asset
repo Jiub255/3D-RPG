@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39dc95519b848984e81ea413e7d16537, type: 3}
   m_Name: Goblin Knockback
   m_EditorClassIdentifier: 
-  _baseValue: 5
+  _baseValue: 10
   _modifiers: 
   _moddedValue: 0

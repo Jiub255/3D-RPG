@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 965863731860182856}
   - component: {fileID: 965863731860182858}
-  - component: {fileID: 965863731860182857}
+  - component: {fileID: 1369224505704636874}
   m_Layer: 3
   m_Name: Dialog
   m_TagString: Untagged
@@ -47,8 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textAssetSO: {fileID: 11400000, guid: d397d3aed6267b049956f7fc18976da6, type: 2}
   _npcDialogTextAsset: {fileID: 4900000, guid: 0359096e481c2d641a7010faf76defeb, type: 3}
---- !u!136 &965863731860182857
-CapsuleCollider:
+  _playerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
+--- !u!135 &1369224505704636874
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -57,9 +58,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 4
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 0.62
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4578445785106580079
 GameObject:

@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "States/Player/Dialog State", fileName = "Player Dialog State")]
 public class SOPlayerDialogState : SOState<PlayerCharacterController>
 {
-
     public override void Init(PlayerCharacterController parent)
     {
         base.Init(parent);

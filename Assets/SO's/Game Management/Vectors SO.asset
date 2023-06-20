@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39dc95519b848984e81ea413e7d16537, type: 3}
-  m_Name: Knockback
+  m_Script: {fileID: 11500000, guid: eb9ec891f335df642b5f714a0d2e956e, type: 3}
+  m_Name: Vectors SO
   m_EditorClassIdentifier: 
-  _baseValue: 10
-  _modifiers: 
-  _moddedValue: 10
+  Forward: {x: 0, y: 0, z: 0}
+  Right: {x: 0, y: 0, z: 0}

@@ -17,11 +17,13 @@ public class CameraMoveRotate : MonoBehaviour
     private float _smoothTime = 0.3f;
     [SerializeField]
     private SOPlayerInstance _playerInstanceSO;
+    [SerializeField]
+    private SOVectors _vectorsSO;
 
     private Transform _transform;
     private Transform _playerTransform;
-    private Vector3 _forward;
-    private Vector3 _right;
+/*    private Vector3 _forward;
+    private Vector3 _right;*/
     private InputAction _zoomAction;
     private InputAction _rotateCameraAction;
     private InputAction _mouseDeltaAction;
@@ -87,20 +89,23 @@ public class CameraMoveRotate : MonoBehaviour
     // Also once when the script loads, so movement and zooming work from the beginning. 
     private void GetVectors()
     {
-        _forward = _transform.forward;
-        _right = _transform.right;
+        Vector3 forward = _transform.forward;
+        Vector3 right = _transform.right;
 
         // Project the forward and right vectors onto the horizontal plane (y = 0)
-        _forward.y = 0f;
-        _right.y = 0f;
+        forward.y = 0f;
+        right.y = 0f;
 
         // Normalize them
-        _forward.Normalize();
-        _right.Normalize();
+        forward.Normalize();
+        right.Normalize();
+
+        _vectorsSO.Forward = forward;
+        _vectorsSO.Right = right;
 
         // Send the forward and right vectors to player movement script.
         // Is the right vector necessary? 
-        OnRotatedCamera?.Invoke(_forward, _right);
+//        OnRotatedCamera?.Invoke(_forward, _right);
     }
 
     private void RotateCamera()

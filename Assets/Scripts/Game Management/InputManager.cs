@@ -26,11 +26,11 @@ public class InputManager : MonoBehaviour
     {
         // This fixes the bug but causes errors, other action maps wont work after.  
         // Not really sure what's going on and how it works. 
-        PC.Movement.MovePlayer.Dispose();
+/*        PC.Movement.MovePlayer.Dispose();
         PC.Movement.Melee.Dispose();
         PC.Movement.Interact.Dispose();
         // This fixes the bug introduced by the above bug fix. 
-        PC.Enable();
+        PC.Enable();*/
 
         actionMap.Disable();
     }

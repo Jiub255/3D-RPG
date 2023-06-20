@@ -81,7 +81,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""31000fad-580d-47a9-8417-85b019cd26e7"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": true
                 },
                 {
@@ -90,7 +90,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""305104f5-273a-4410-b427-9b438a8a8493"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
@@ -99,7 +99,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""9947bc1e-5d59-4c1a-b3bd-b2d2bd215acb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": true
                 }
             ],

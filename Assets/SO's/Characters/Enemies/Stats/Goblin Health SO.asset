@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a5b9b8f2e85774f8ba458d3d316a94, type: 3}
   m_Name: Goblin Health SO
   m_EditorClassIdentifier: 
-  MaxHealth: 3
-  CurrentHealth: 3
+  MaxHealth: 444
+  CurrentHealth: 444

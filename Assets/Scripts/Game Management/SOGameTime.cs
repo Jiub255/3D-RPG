@@ -6,13 +6,16 @@ public class SOGameTime : ScriptableObject, IResettable
     // 1 day = 30 minutes: 24 hours in a day, 2 half hours in an hour, 24 * 2 = 48;
 	public float GameTimeMultiplier = 48f;
 
-	private float _gameTime = 0f;
+    // Start at noon, 43200 seconds = 12 hours. 
+	private float _gameTime = 43200f;
 
     public void ResetOnExitPlayMode()
     {
         // 1 day = 30 minutes: 24 hours in a day, 2 half hours in an hour, 24 * 2 = 48;
         GameTimeMultiplier = 48;
-        _gameTime = 0f;
+
+        // Start at noon, 43200 seconds = 12 hours. 
+        _gameTime = 43200f;
     }
 
     public void IncrementTime(float amount)
