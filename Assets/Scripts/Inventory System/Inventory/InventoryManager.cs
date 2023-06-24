@@ -14,4 +14,9 @@ public class InventoryManager : MonoBehaviour
     {
 		_inventorySO.RemoveItem(item);
     }
+
+    public void AddItemAmount(ItemAmount itemAmount)
+    {
+        _inventorySO.AddItemAmount(itemAmount);
+    }
 }

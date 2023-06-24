@@ -8,6 +8,15 @@
 
 
         Finish Loot System. 
+            Change List<List<ItemAmount>> to List<EnemyLoot> in SOLoots to be able to access enemy data and deal with 
+                disabling the enemy object when you've taken its last item. 
+            Did that, couldn't add EnemyLoot to the loot SO. Trying to pass a plain C# class EnemyLoot instead, but now how
+                to deal with leaving the trigger area before fully looting enemy? Have the class communicate back to the 
+                EnemyLootController? Seems like there's an easier way. 
+                Or actually, since EnemyLoot class holds just an instance ID and a List<ItemAmount>, shouldn't the list on
+                    the enemy get changed every time the SO changed it? 
+            So just go back to List<List<ItemAmounts>>. Since they get passed by reference, there shouldn't need to be an ID.
+                TRY THIS. 
 
 
         Clicking while in UI "loads up" an attack which goes off once you go back to the game. 

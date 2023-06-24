@@ -20,7 +20,6 @@ public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController
     public NavMeshAgent NavMeshAgent { get; protected set; }
     public Vector3 KnockbackVector { get; protected set; }
 
-
     protected override void Awake()
     {
         // Need to get references before calling first state's constructor? 
@@ -40,20 +39,8 @@ public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController
         Debug.Log("GetKnockedBack called on PlayerCharacterController");
     }
 
-    public State<PlayerCharacterController2> Movement()
-    {
-        return new PlayerMovementState(this, _speed, _turnSpeed);
-    }
-    public State<PlayerCharacterController2> Attack()
-    {
-        return new PlayerAttackState(this, _attackAnimationClip);
-    }
-    public State<PlayerCharacterController2> Dialog()
-    {
-        return new PlayerDialogState(this);
-    }
-    public State<PlayerCharacterController2> Knockback()
-    {
-        return new PlayerKnockbackState(this, _knockbackDuration);
-    }
+    public State<PlayerCharacterController2> Movement() { return new PlayerMovementState(this, _speed, _turnSpeed); }
+    public State<PlayerCharacterController2> Attack() { return new PlayerAttackState(this, _attackAnimationClip); }
+    public State<PlayerCharacterController2> Dialog() { return new PlayerDialogState(this); }
+    public State<PlayerCharacterController2> Knockback() { return new PlayerKnockbackState(this, _knockbackDuration); }
 }

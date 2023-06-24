@@ -67,6 +67,21 @@ public class SOInventory : ScriptableObject , IResettable
         }
     }
 
+    public void AddItemAmount(ItemAmount itemAmount)
+    {
+        ItemAmount inventoryItemAmount = Contains(itemAmount.Item);
+        if (inventoryItemAmount != null)
+        {
+            inventoryItemAmount.Amount += itemAmount.Amount;
+        }
+        else
+        {
+            ItemAmounts.Add(itemAmount);
+        }
+        
+        OnInventoryChanged?.Invoke();
+    }
+
     // FOR TESTING
     // Clear inventory when exiting play mode. 
     public void ResetOnExitPlayMode()

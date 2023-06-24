@@ -43,6 +43,6 @@ public abstract class StateRunner2<T> : MonoBehaviour where T : MonoBehaviour
 
         _activeState = state;
 
-        Debug.Log($"Changed state to: {_activeState.GetType()}");
+//        Debug.Log($"Changed state to: {_activeState.GetType()}");
     }
 }

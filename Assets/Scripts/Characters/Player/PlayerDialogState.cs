@@ -5,8 +5,8 @@
 
         UIDialog.OnDialogEnd += ChangeToMovementState;
 
-        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
-        S.I.IM.DisableActionMap(S.I.IM.PC.UI);
+/*        S.I.IM.DisableActionMap(S.I.IM.PC.Movement);
+        S.I.IM.DisableActionMap(S.I.IM.PC.UI);*/
     }
 
 /*    public override void Init(PlayerCharacterController2 parent)
@@ -17,8 +17,8 @@
     public override void Exit()
     {
         // Reenable movement and UI input.
-        S.I.IM.PC.Movement.Enable();
-        S.I.IM.PC.UI.Enable();
+/*        S.I.IM.PC.Movement.Enable();
+        S.I.IM.PC.UI.Enable();*/
 
         UIDialog.OnDialogEnd -= ChangeToMovementState;
     }

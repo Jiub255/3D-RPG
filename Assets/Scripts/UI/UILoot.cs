@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UILoot : MonoBehaviour
@@ -10,18 +9,20 @@ public class UILoot : MonoBehaviour
 	private GameObject _lootSlotPrefab;
 	[SerializeField]
 	private Transform _lootContent;
+	[SerializeField]
+	private TextMeshProUGUI _currentEnemyName;
 
 	private void OnEnable()
 	{
 		SetupLootSlots();
 
-		EnemyLoot.OnLootsSOChanged += SetupLootSlots;
+		EnemyLootController.OnLootsSOChanged += SetupLootSlots;
 		LootSlot.OnItemAmountLooted += (i) => { SetupLootSlots(); };
 	}
 
     private void OnDisable()
     {
-		EnemyLoot.OnLootsSOChanged -= SetupLootSlots;
+		EnemyLootController.OnLootsSOChanged -= SetupLootSlots;
 		LootSlot.OnItemAmountLooted -= (i) => { SetupLootSlots(); };
 	}
 
@@ -29,13 +30,16 @@ public class UILoot : MonoBehaviour
     {
 		ClearSlots();
 
-		// TODO - Check if CurrentLootList == null here? 
-		// TODO - Goblin can die over and over again, fix it. 
-		foreach (ItemAmount itemAmount in _lootsSO.CurrentLootList)
+		if (_lootsSO.CurrentEnemyLoot != null)
         {
-			GameObject slot = Instantiate(_lootSlotPrefab, _lootContent);
-			slot.GetComponent<LootSlot>().SetupSlot(itemAmount);
-		}
+			_currentEnemyName.text = _lootsSO.CurrentEnemyLoot.transform.parent.gameObject.name;
+
+			foreach (ItemAmount itemAmount in _lootsSO.CurrentEnemyLoot.ItemAmounts)
+			{
+				GameObject slot = Instantiate(_lootSlotPrefab, _lootContent);
+				slot.GetComponent<LootSlot>().SetupSlot(itemAmount);
+			}
+        }
     }
 
 	private void ClearSlots()
@@ -44,5 +48,20 @@ public class UILoot : MonoBehaviour
 		{
 			Destroy(slotTransform.gameObject);
 		}
+	}
+
+	// Called by buttons in loot UI. 
+	public void NextEnemyLoot()
+    {
+		_lootsSO.NextLoot();
+
+		SetupLootSlots();
+    }
+
+	public void PreviousEnemyLoot()
+    {
+		_lootsSO.PreviousLoot();
+	
+		SetupLootSlots();
 	}
 }

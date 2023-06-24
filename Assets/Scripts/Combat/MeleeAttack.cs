@@ -49,7 +49,7 @@ public class MeleeAttack : MonoBehaviour
         Collider[] hits = Physics.OverlapBox(_attackBox.position, _attackBox.localScale / 2, Quaternion.identity, _targetLayerMask);
         foreach (Collider hit in hits)
         {
-            Debug.Log($"Hit {hit.name}");
+//            Debug.Log($"Hit {hit.name}");
 
             // Knockback
             // Do knockback before damage so knockback state can be entered before dying. 
@@ -59,7 +59,7 @@ public class MeleeAttack : MonoBehaviour
                 Vector3 xzProjection = new Vector3(direction.x, 0f, direction.z);
                 Vector3 normalized = xzProjection.normalized;
                 Vector3 knockbackVector = normalized * _knockbackForce;
-                Debug.Log($"Knockback vector: {knockbackVector}");
+//                Debug.Log($"Knockback vector: {knockbackVector}");
                 hit.GetComponent<IKnockbackable>().GetKnockedBack(knockbackVector);
             }
 

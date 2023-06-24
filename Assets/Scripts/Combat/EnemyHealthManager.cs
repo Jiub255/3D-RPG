@@ -16,12 +16,8 @@ public class EnemyHealthManager : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log($"{transform.gameObject.name} died. ");
-//        transform.gameObject.SetActive(false);
 
-
-        // Who listens?
-        // SOEnemyKnockbackState listens, sets dying bool to true, 
-        // so enemy can go to dead state after being knocked back. 
+        // EnemyController listens, sets state and animation to dead. 
         // EnemyLoot listens, enables loot collider. 
         OnEnemyDied?.Invoke();
     }

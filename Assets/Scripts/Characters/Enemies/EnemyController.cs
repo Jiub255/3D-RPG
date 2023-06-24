@@ -16,20 +16,25 @@ public class EnemyController : StateRunner<EnemyController>, IKnockbackable
         Animator = GetComponentInChildren<Animator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
-        EnemyHealthManager.OnEnemyDied += SetStatesToDead;
+        EnemyHealthManager.OnEnemyDied += HandleEnemyDeath;
 
         base.Awake();
     }
 
     private void OnDisable()
     {
-        EnemyHealthManager.OnEnemyDied -= SetStatesToDead;
+        EnemyHealthManager.OnEnemyDied -= HandleEnemyDeath;
     }
 
-    private void SetStatesToDead()
+    private void HandleEnemyDeath()
     {
         Animator.SetTrigger("Dead");
+
         ChangeState(typeof(SOEnemyDeadState));
+
+        GetComponent<Collider>().enabled = false;
+
+        NavMeshAgent.enabled = false;
     }
 
     // Gets called from PlayerMeleeAttack on hit. Searches for IKnockbackable and calls this method. 
@@ -39,6 +44,6 @@ public class EnemyController : StateRunner<EnemyController>, IKnockbackable
     {
         KnockbackVector = knockbackVector;
         ChangeState(typeof(SOEnemyKnockbackState));
-        Debug.Log($"GetKnockedBack called on {gameObject.name}");
+//        Debug.Log($"GetKnockedBack called on {gameObject.name}");
     }
 }

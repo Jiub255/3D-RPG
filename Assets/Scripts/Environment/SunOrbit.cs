@@ -30,8 +30,8 @@ public class SunOrbit : MonoBehaviour
     {
         UpdateGameTimeMultiplier();
 
-        Debug.Log($"Rotation Angle: {_rotationAngle}");
-        Debug.Log($"Rotation Axis: {_rotationAxis}");
+//        Debug.Log($"Rotation Angle: {_rotationAngle}");
+//        Debug.Log($"Rotation Axis: {_rotationAxis}");
     }
 
     // Sets sun at noon position based on rotation angle and sun distance. 

@@ -17,16 +17,16 @@ public class InteractablePressKey : InteractableTrigger
     {
         int playerInteractLayerMask = LayerMask.NameToLayer("PlayerInteract");
         float colliderRadius = GetComponent<SphereCollider>().radius;
-        Debug.Log($"Collider radius: {colliderRadius}, PlayerLayerMask int: {playerInteractLayerMask}");
+//        Debug.Log($"Collider radius: {colliderRadius}, PlayerLayerMask int: {playerInteractLayerMask}");
         if (Physics.CheckSphere(transform.position, colliderRadius, _playerInteractLayerMask))
         {
             _playerInRange = true;
-            Debug.Log("Player in range");
+//            Debug.Log("Player in range");
         }
         else
         {
             _playerInRange = false;
-            Debug.Log("Player not in range");
+//            Debug.Log("Player not in range");
         }
     }
 
