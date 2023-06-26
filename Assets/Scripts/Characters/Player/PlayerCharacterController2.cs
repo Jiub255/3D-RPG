@@ -8,17 +8,19 @@ public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController
     protected float _speed = 10f;
     [SerializeField]
     protected float _turnSpeed = 15f;
-    public SOVectors VectorsSO;
+    [SerializeField]
+    private SOVectors _vectorsSO;
 
     [SerializeField, Header("Attack State Variables")]
     protected AnimationClip _attackAnimationClip;
 
     [SerializeField, Header("Knockback State Variables")]
     protected float _knockbackDuration = 0.5f;
+    protected Vector3 _knockbackVector;
 
+    // Used by multiple states. 
     public Animator Animator { get; protected set; }
     public NavMeshAgent NavMeshAgent { get; protected set; }
-    public Vector3 KnockbackVector { get; protected set; }
 
     protected override void Awake()
     {
@@ -28,19 +30,18 @@ public class PlayerCharacterController2 : StateRunner2<PlayerCharacterController
 
         // Start in movement state. 
         _activeState = Movement();
-        
-//        base.Awake();
     }
 
     public void GetKnockedBack(Vector3 knockbackVector)
     {
-        KnockbackVector = knockbackVector;
-        ChangeState2(Knockback());
+        _knockbackVector = knockbackVector;
+        ChangeStateTo(Knockback());
         Debug.Log("GetKnockedBack called on PlayerCharacterController");
     }
 
-    public State<PlayerCharacterController2> Movement() { return new PlayerMovementState(this, _speed, _turnSpeed); }
+    // These methods create, initialize, and set _activeState to, a new state everytime the state is changed. 
+    public State<PlayerCharacterController2> Movement() { return new PlayerMovementState(this, _speed, _turnSpeed, _vectorsSO); }
     public State<PlayerCharacterController2> Attack() { return new PlayerAttackState(this, _attackAnimationClip); }
     public State<PlayerCharacterController2> Dialog() { return new PlayerDialogState(this); }
-    public State<PlayerCharacterController2> Knockback() { return new PlayerKnockbackState(this, _knockbackDuration); }
+    public State<PlayerCharacterController2> Knockback() { return new PlayerKnockbackState(this, _knockbackDuration, _knockbackVector); }
 }

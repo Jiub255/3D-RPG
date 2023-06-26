@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class PlayerKnockbackState : State<PlayerCharacterController2>
 {
     protected float _knockbackDuration = 0.5f;
+    protected Vector3 _knockbackVector;
     protected float _timer;
     protected NavMeshAgent _navMeshAgent;
     protected Rigidbody _rigidbody;
@@ -11,9 +12,10 @@ public class PlayerKnockbackState : State<PlayerCharacterController2>
     protected float _angularSpeed;
     protected float _acceleration;
 
-    public PlayerKnockbackState(PlayerCharacterController2 parent, float knockbackDuration) : base(parent)
+    public PlayerKnockbackState(PlayerCharacterController2 parent, float knockbackDuration, Vector3 knockbackVector) : base(parent)
     {
         _knockbackDuration = knockbackDuration;
+        _knockbackVector = knockbackVector;
 
         _timer = 0f;
         _navMeshAgent = _runner.NavMeshAgent;
@@ -43,13 +45,13 @@ public class PlayerKnockbackState : State<PlayerCharacterController2>
         _timer += Time.deltaTime;
         if (_timer > _knockbackDuration)
         {
-            _runner.ChangeState2(_runner.Movement());
+            _runner.ChangeStateTo(_runner.Movement());
         }
     }
 
     public override void FixedUpdate()
     {
-        _navMeshAgent.velocity = _runner.KnockbackVector;
+        _navMeshAgent.velocity = _knockbackVector;
     }
 
     public override void Exit() 

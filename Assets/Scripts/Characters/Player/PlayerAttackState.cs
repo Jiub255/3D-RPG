@@ -37,7 +37,7 @@ public class PlayerAttackState : State<PlayerCharacterController2>
         _timer += Time.deltaTime;
         if (_timer > _animationLength)
         {
-            _runner.ChangeState2(_runner.Movement());
+            _runner.ChangeStateTo(_runner.Movement());
         }
     }
 

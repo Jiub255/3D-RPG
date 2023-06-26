@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 721171792552828285}
   - component: {fileID: 2108451869}
   - component: {fileID: 4779376784047883645}
-  - component: {fileID: 2108451870}
   - component: {fileID: 6830987762799916731}
+  - component: {fileID: 1598887446}
   m_Layer: 9
   m_Name: Goblin
   m_TagString: Untagged
@@ -90,25 +90,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2108451870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721171792552828259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 587f960befc644e42b81cb9c16de480b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _states:
-  - {fileID: 11400000, guid: 3eefb2adcdd9d1648aaa793bbdd777a4, type: 2}
-  - {fileID: 11400000, guid: f4f203638ad210945935e9c2fbc38942, type: 2}
-  - {fileID: 11400000, guid: 444f9ac6a72570841935cc0e5f068572, type: 2}
-  - {fileID: 11400000, guid: ad77dbc97cdfd5f4397b11231caaa633, type: 2}
-  - {fileID: 11400000, guid: aedbd1f02a9bebf44a8594373395a4d4, type: 2}
-  PlayerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
 --- !u!114 &6830987762799916731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +103,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthSO: {fileID: 11400000, guid: 9933fa2dcf5c64c4c811c0d04212b9de, type: 2}
+--- !u!114 &1598887446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721171792552828259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711e51b5c7f853e48b1bc0131dfd5a74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chaseRadius: 5
+  _attackRadius: 2
+  _attackAnimationClip: {fileID: 7400000, guid: b8c7eb45f37fced4190cf1c803754d38, type: 2}
+  _knockbackDuration: 0.25
+  PlayerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
 --- !u!1 &3533580117021564029
 GameObject:
   m_ObjectHideFlags: 0

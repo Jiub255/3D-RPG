@@ -25,7 +25,7 @@
 
     private void ChangeToMovementState()
     {
-        _runner.ChangeState2(_runner.Movement());
+        _runner.ChangeStateTo(_runner.Movement());
     }
 
     public override void Update() {}

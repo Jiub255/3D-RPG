@@ -34,7 +34,7 @@ public abstract class StateRunner2<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    public void ChangeState2(State<T> state)
+    public void ChangeStateTo(State<T> state)
     {
         if (_activeState != null)
         {

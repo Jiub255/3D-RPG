@@ -22,16 +22,16 @@ public class PlayerMovementState : State<PlayerCharacterController2>/*, IMovemen
     // Animation
     protected PlayerMovementAnimation _playerMovementAnimation;
 
-    public PlayerMovementState(PlayerCharacterController2 parent, float speed, float turnSpeed) : base(parent)
+    public PlayerMovementState(PlayerCharacterController2 parent, float speed, float turnSpeed, SOVectors vectorsSO) : base(parent)
     {
         _speed = speed;
         _turnSpeed = turnSpeed;
+        _vectorsSO = vectorsSO;
 
         // References
         _transform = parent.transform;
         _movePlayerAction = S.I.IM.PC.Movement.MovePlayer;
-        _navMeshAgent = _runner.NavMeshAgent;
-        _vectorsSO = parent.VectorsSO;
+        _navMeshAgent = parent.NavMeshAgent;
 
         // Events
         S.I.IM.PC.Movement.MovePlayer.started += (c) => _moving = true;
@@ -87,13 +87,13 @@ public class PlayerMovementState : State<PlayerCharacterController2>/*, IMovemen
     protected void ChangeToAttackState(InputAction.CallbackContext context)
     {
         // Change to AttackState after pressing attack button. 
-        _runner.ChangeState2(_runner.Attack());
+        _runner.ChangeStateTo(_runner.Attack());
     }
 
     protected void StartDialog(Transform npcTransform)
     {
         _transform.LookAt(npcTransform);
-        _runner.ChangeState2(_runner.Dialog());
+        _runner.ChangeStateTo(_runner.Dialog());
     }
 
     public override void Exit()

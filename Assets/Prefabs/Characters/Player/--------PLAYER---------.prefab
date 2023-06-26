@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _turnSpeed: 15
-  VectorsSO: {fileID: 11400000, guid: 6ee65e9736678cf44826dea09520179f, type: 2}
+  _vectorsSO: {fileID: 11400000, guid: 6ee65e9736678cf44826dea09520179f, type: 2}
   _attackAnimationClip: {fileID: 7400000, guid: b8c7eb45f37fced4190cf1c803754d38, type: 2}
   _knockbackDuration: 0.5
 --- !u!1 &7422589643959043076
