@@ -211,9 +211,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0248c91e3c1af8a41962f67810c3276a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemAmounts:
-  - Item: {fileID: 11400000, guid: d2daaa15a15b511459b6b363ded897bf, type: 2}
+  ItemAmounts:
+  - Item: {fileID: 11400000, guid: d02c6e35cf58e11429b4d675d71fa740, type: 2}
     Amount: 1
+  - Item: {fileID: 11400000, guid: d2daaa15a15b511459b6b363ded897bf, type: 2}
+    Amount: 4
   _lootsSO: {fileID: 11400000, guid: 089d652a0bf31e740995e0d48f3be726, type: 2}
   _lootTriggerCollider: {fileID: 8682767159079415409}
 --- !u!1 &6396018345531151342

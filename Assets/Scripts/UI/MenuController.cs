@@ -26,7 +26,8 @@ public class MenuController : MonoBehaviour
         S.I.IM.PC.UI.ToggleInventory.started += ToggleInventory;
         NPCDialog.OnInteractWithNPC += EnableDialogCanvas;
         UIDialog.OnDialogEnd += DisableDialogCanvas;
-        EnemyLootController.OnLootsSOChanged += ToggleLootMenu;
+        EnemyLootController.OnEnteredFirstLootTrigger += OpenLootMenu;
+        EnemyLootController.OnEnemyLootListsEmptied += CloseLootMenu;
 
         _gameManager = S.I.GameManager;
         _playerControls = S.I.IM.PC;
@@ -38,12 +39,18 @@ public class MenuController : MonoBehaviour
         S.I.IM.PC.UI.ToggleInventory.started -= ToggleInventory;
         NPCDialog.OnInteractWithNPC -= EnableDialogCanvas;
         UIDialog.OnDialogEnd -= DisableDialogCanvas;
-        EnemyLootController.OnLootsSOChanged -= ToggleLootMenu;
+        EnemyLootController.OnEnteredFirstLootTrigger -= OpenLootMenu;
+        EnemyLootController.OnEnemyLootListsEmptied -= CloseLootMenu;
     }
 
-    private void ToggleLootMenu()
+    private void OpenLootMenu()
     {
-        _lootCanvas.SetActive(!_lootCanvas.activeInHierarchy);
+        _lootCanvas.SetActive(true);
+    }
+
+    private void CloseLootMenu()
+    {
+        _lootCanvas.SetActive(false);
     }
 
     private void ToggleStatsMenu(InputAction.CallbackContext context)

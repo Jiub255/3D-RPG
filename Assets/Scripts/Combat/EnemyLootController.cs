@@ -5,12 +5,12 @@ using UnityEngine;
 [Serializable]
 public class EnemyLoot
 {
-    public int ID;
+    public string Name;
     public List<ItemAmount> ItemAmounts;
 
-    public EnemyLoot(int id, List<ItemAmount> itemAmounts)
+    public EnemyLoot(string name, List<ItemAmount> itemAmounts)
     {
-        ID = id;
+        Name = name;
         ItemAmounts = itemAmounts;
     }
 }
@@ -22,7 +22,7 @@ public class EnemyLootController : MonoBehaviour
     // Heard by MenuController, opens loot UI.
     public static event Action OnEnteredFirstLootTrigger;
     // Heard by MenuController, closes loot UI.
-    public static event Action OnEnemyLootsEmptied;
+    public static event Action OnEnemyLootListsEmptied;
 
 	public List<ItemAmount> ItemAmounts;
 
@@ -31,10 +31,15 @@ public class EnemyLootController : MonoBehaviour
     [SerializeField]
     private Collider _lootTriggerCollider;
 
+    private EnemyLoot _enemyLoot;
+
     private void OnEnable()
     {
         LootSlot.OnItemAmountLooted += RemoveItemAmount;
         EnemyHealthManager.OnEnemyDied += () => _lootTriggerCollider.enabled = true;
+
+        // Get reference to the class here so it can be removed later. 
+        _enemyLoot = new EnemyLoot(transform.parent.gameObject.name, ItemAmounts);
     }
 
     private void OnDisable()
@@ -48,14 +53,16 @@ public class EnemyLootController : MonoBehaviour
         // Update SOLoots. Changes current enemy loot to first in list if current one gets emptied.
         _lootsSO.RemoveFromCurrentLootList(itemAmount);
 
-        // If EnemyLoots is empty, then disable loot UI. 
+        // If EnemyLootLists is empty, then disable loot UI. 
+        Debug.Log($"RemoveItemAmount EnemyLoots list count: {_lootsSO.EnemyLoots.Count}");
         if (_lootsSO.EnemyLoots.Count == 0)
         {
+            Debug.Log("Inside if block");
             // Disable loot collider. 
             _lootTriggerCollider.enabled = false;
 
             // Heard by MenuController, disables loot UI. 
-            OnEnemyLootsEmptied?.Invoke();
+            OnEnemyLootListsEmptied?.Invoke();
         }
         else
         {
@@ -68,10 +75,11 @@ public class EnemyLootController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Add loot list to SO. 
-        _lootsSO.AddEnemyLoot(new EnemyLoot(transform.parent.gameObject.GetInstanceID(), ItemAmounts)/*this*/);
+        _lootsSO.AddEnemyLoot(_enemyLoot);
 
         // MenuController listens, toggles menu. 
         // If one loot on list after adding, menu not open, so...
+        Debug.Log($"TriggerEnter EnemyLoots list count: {_lootsSO.EnemyLoots.Count}");
         if (_lootsSO.EnemyLoots.Count == 1)
         {
             // Open menu. Heard by MenuController. 
@@ -86,13 +94,14 @@ public class EnemyLootController : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // Remove loot list from SO.
-        _lootsSO.RemoveEnemyLoot(new EnemyLoot(transform.parent.gameObject.GetInstanceID(), ItemAmounts)/*this*/);
+        _lootsSO.RemoveEnemyLoot(_enemyLoot);
 
         // If no loots on list after removing last one...
+        Debug.Log($"TriggerExit EnemyLoots list count: {_lootsSO.EnemyLoots.Count}");
         if (_lootsSO.EnemyLoots.Count == 0)
         {
             // Close loot menu, heard by MenuController. 
-            OnEnemyLootsEmptied?.Invoke();
+            OnEnemyLootListsEmptied?.Invoke();
         }
         else
         {

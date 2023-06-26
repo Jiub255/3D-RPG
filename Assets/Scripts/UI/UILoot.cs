@@ -32,7 +32,9 @@ public class UILoot : MonoBehaviour
 
 		if (_lootsSO.CurrentEnemyLoot != null)
         {
-			_currentEnemyName.text = _lootsSO.CurrentEnemyLoot.transform.parent.gameObject.name;
+			// TODO - Pass a class with the loot list and the enemy name instead of just the list? 
+			_currentEnemyName.text = _lootsSO.CurrentEnemyLoot.Name; 
+//			_currentEnemyName.text = _lootsSO.CurrentLootList.transform.parent.gameObject.name;
 
 			foreach (ItemAmount itemAmount in _lootsSO.CurrentEnemyLoot.ItemAmounts)
 			{
