@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6c5ce515abae9b4d9456a2b297f33cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInteractLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   _textAssetSO: {fileID: 11400000, guid: d397d3aed6267b049956f7fc18976da6, type: 2}
-  _npcDialogTextAsset: {fileID: 4900000, guid: 0359096e481c2d641a7010faf76defeb, type: 3}
+  _npcDialogTextAsset: {fileID: 4900000, guid: 84e7185aae22229489dc85403af8ec8e, type: 3}
   _playerInstanceSO: {fileID: 11400000, guid: 43071cc2e0ed9b142a1c81e67f145376, type: 2}
 --- !u!135 &1369224505704636874
 SphereCollider:
