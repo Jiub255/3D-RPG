@@ -82,7 +82,7 @@ public class UIDialog : MonoBehaviour
     private void MakeNewDialog(string dialogText)
     {
         Dialog newDialog = Instantiate(_dialogPrefab,
-            _dialogContent.transform).GetComponent<Dialog>();
+            _dialogContent.transform).GetComponentInChildren<Dialog>();
 
         newDialog.Setup(dialogText);
     }
@@ -90,7 +90,7 @@ public class UIDialog : MonoBehaviour
     private void MakeNewResponse(string newDialogText, int choiceIndex)
     {
         Response newResponse = Instantiate(_responsePrefab,
-            _responseContent.transform).GetComponent<Response>();
+            _responseContent.transform).GetComponentInChildren<Response>();
 
         newResponse.Setup(newDialogText, choiceIndex);
 
